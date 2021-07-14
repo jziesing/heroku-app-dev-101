@@ -19,7 +19,7 @@ let express = require('express'),
 
 // get child accounts
 // ApiRoutes.get("/fetch/account/:parentAccountId", PubFetchAccounts.FetchChildAccountsGet);
-ApiRoutes.get("/fetch/things", PubFetchAccounts.fetchThings);
+ApiRoutes.get("/fetch/things", PubFetchAccounts.FetchThingsGet);
 
 
 /*
