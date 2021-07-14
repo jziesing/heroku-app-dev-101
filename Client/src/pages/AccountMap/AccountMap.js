@@ -64,7 +64,7 @@ class AccountMap extends React.Component {
 
     tableData() {
 
-        return this.state.things.map((commit, index) => {
+        return this.state.things.map((thing, index) => {
             return (
                 <tr key={index}><td>{thing.title}</td><td>{thing.description}</td></tr>
             );
