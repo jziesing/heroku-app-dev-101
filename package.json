@@ -20,8 +20,6 @@
     "babel-preset-stage-0": "^6.22.0",
     "babel-register": "^6.22.0",
     "body-parser": "^1.16.0",
-    "d3-fetch": "1.1.2",
-    "d3-scale": "2.1.2",
     "express": "^4.14.1",
     "history": "^4.5.1",
     "path": "^0.12.7",
@@ -29,10 +27,7 @@
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-router": "^3.0.2",
-    "react-simple-maps": "0.12.1",
     "react-scripts": "3.0.1",
-    "react-tap-event-plugin": "^2.0.1",
-    "react-tooltip": "^3.9.2",
     "superagent": "^3.4.1",
     "webpack": "^1.14.0"
   }
