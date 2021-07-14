@@ -12,7 +12,8 @@ class AccountMap extends React.Component {
 		super(props);
 		this.state = {
             isLoading: false,
-            btnClicked: false
+            btnClicked: false,
+            things: null,
         };
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
 	}
@@ -27,6 +28,7 @@ class AccountMap extends React.Component {
         	.end((error, response) => {
           		if (!error && response) {
                     console.log(JSON.parse(response.text));
+                    this.setState({things: JSON.parse(response.text)});
 
           		} else {
               		console.log(`Error fetching data`, error);
@@ -59,6 +61,17 @@ class AccountMap extends React.Component {
 		}
 	}
 
+
+    tableData() {
+
+        return this.state.things.map((commit, index) => {
+            return (
+                <tr key={index}><td>{thing.title}</td><td>{thing.description}</td></tr>
+            );
+        });
+
+    }
+
     dataMarkup() {
 
         if(this.state.btnClicked) {
@@ -72,11 +85,7 @@ class AccountMap extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th>#</th>
-                            <th>Not</th>
-                            <th>Yet</th>
-                        </tr>
+                        {  this.tableData() }
                     </tbody>
                 </table>
             )
