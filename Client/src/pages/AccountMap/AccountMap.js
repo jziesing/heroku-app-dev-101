@@ -18,20 +18,6 @@ class AccountMap extends React.Component {
 	}
 
     componentWillMount() {
-
-        // let fetchAccountsURL = '/fetch/accounts/';
-        // ajax.get(fetchAccountsURL)
-        // 	.end((error, response) => {
-        //   		if (!error && response) {
-        //             console.log(JSON.parse(response.text));
-	    //           	this.setState({
-	    //             	parentAccounts: JSON.parse(response.text),
-        //                 searchParentAccounts: JSON.parse(response.text)
-	    //         	});
-        //   		} else {
-        //       		console.log(`Error fetching data`, error);
-        //   		}
-        // 	});
   	}
 
     handleFormSubmit(event)  {
