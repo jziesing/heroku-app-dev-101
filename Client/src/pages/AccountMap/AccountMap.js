@@ -16,6 +16,7 @@ class AccountMap extends React.Component {
             things: null,
         };
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.handleMakeData = this.handleMakeData.bind(this);
 	}
 
     componentWillMount() {
@@ -38,6 +39,23 @@ class AccountMap extends React.Component {
         	});
     }
 
+    handleMakeData() {
+        this.setState({isLoading: true});
+        let fetchAccountsURL = '/make/data/';
+        ajax.get(fetchAccountsURL)
+        	.end((error, response) => {
+          		if (!error && response) {
+                    console.log(JSON.parse(response.text));
+                    // this.setState({things: JSON.parse(response.text)});
+
+          		} else {
+              		console.log(`Error fetching data`, error);
+          		}
+                this.setState({btnClicked: true});
+                this.setState({isLoading: false});
+        	});
+    }
+
     btnMarkup() {
 		if(this.state.isLoading) {
 			return (
@@ -48,6 +66,10 @@ class AccountMap extends React.Component {
 					<div class="form-group">
 							<button type="button" class="btn btn-cSend disabled">Get Data</button>
 					</div>
+
+					<div class="form-group">
+							<button type="button" class="btn btn-cSend disabled">Make Data</button>
+					</div>
 				</form>
 			);
 		} else {
@@ -55,6 +77,7 @@ class AccountMap extends React.Component {
 				<form class="form-horizontal">
 					<div class="form-group">
 							<button type="button" onClick={this.handleFormSubmit} class="btn btn-cSend">Get Data</button>
+                            <button type="button" onClick={this.handleMakeData} class="btn btn-cSend">Make Data</button>
 					</div>
 				</form>
 			);
