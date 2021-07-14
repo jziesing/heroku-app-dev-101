@@ -5,22 +5,17 @@
 
 
 let express = require('express'),
-    PublicFetchAccounts = require('./PubApiRoutes/FetchAccounts'),
+    PublicFetchThings = require('./PubApiRoutes/FetchThings'),
     ApiRoutes = express.Router(),
-    PubFetchAccounts = new PublicFetchAccounts();
+    PubFetchThings = new PublicFetchThings();
 
 
 
 /*
  *  routes
  */
-// add external data
-// ApiRoutes.post("/new/extdata/", PubAddExtData.AddExtDataPost);
-
-// get child accounts
-// ApiRoutes.get("/fetch/account/:parentAccountId", PubFetchAccounts.FetchChildAccountsGet);
-ApiRoutes.get("/fetch/things", PubFetchAccounts.FetchThingsGet);
-
+// get things
+ApiRoutes.get("/fetch/things", PubFetchThings.FetchThingsGet);
 
 /*
  * export
