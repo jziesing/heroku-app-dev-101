@@ -66,7 +66,7 @@ class AccountMap extends React.Component {
 
         return this.state.things.map((thing, index) => {
             return (
-                <tr key={index}><td>{thing.title}</td><td>{thing.description}</td></tr>
+                <tr key={index}><td>{thing.id}</td><td>{thing.title}</td><td>{thing.description}</td></tr>
             );
         });
 
