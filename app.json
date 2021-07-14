@@ -1,0 +1,7 @@
+{
+  "name": "amn-heroku-intro",
+  "repository": "https://github.com/jane-doe/small-sharp-tool",
+  "scripts": {
+    "postdeploy": "node Server/BuildDB.js"
+  },
+}

@@ -35,7 +35,9 @@ class AccountMap extends React.Component {
   	}
 
     handleFormSubmit(event)  {
+        this.setState({isLoading: true});
         this.setState({btnClicked: true});
+        this.setState({isLoading: false});
     }
 
     btnMarkup() {

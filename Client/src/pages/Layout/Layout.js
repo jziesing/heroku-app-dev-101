@@ -21,7 +21,7 @@ class Layout extends React.Component {
     				<link href="/css/bootstrap.min.css" rel="stylesheet" />
     				<link href="/css/index.css" rel="stylesheet" />
     				<link href="/css/bstrapoverrides.css" rel="stylesheet" />
-	              	<title>Account Map</title>
+	              	<title>Heroku Intro</title>
 	          	</head>
 	          	<body>
 				    <nav class="navbar navbar-default navbar-fixed-top">
