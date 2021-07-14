@@ -1,21 +1,14 @@
 {
-  "name": "heroku-web-node",
+  "name": "account-map",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack && node Server/Server.js",
+    "hstart": "webpack && DATABASE_URL=`heroku config:get DATABASE_URL -a account-map-us` node Server/Server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jziesing/heroku-web-node.git"
-  },
-  "author": "",
+  "author": "Jack Ziesing",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jziesing/heroku-web-node/issues"
-  },
-  "homepage": "https://github.com/jziesing/heroku-web-node#readme",
   "dependencies": {
     "babel": "^6.5.2",
     "babel-core": "^6.22.1",

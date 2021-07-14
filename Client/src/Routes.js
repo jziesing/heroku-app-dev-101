@@ -8,14 +8,16 @@ let React = require('react'),
     IndexRoute = ReactRouter.IndexRoute,
     browserHistory = ReactRouter.browserHistory,
     Layout = require("./pages/Layout/Layout.js"),
-    HomePage = require("./pages/HomePage/HomePage.js");
+    AccountMap = require("./pages/AccountMap/AccountMap.js"),
+    NewAccount = require("./pages/NewAccount/NewAccount.js"),
+    NewExtData = require("./pages/NewExtData/NewExtData.js");
 
 
 
 module.exports = (
 	<Router history={browserHistory} >
         <Route path="/" component={Layout}>
-            <IndexRoute component={HomePage} />
+            <IndexRoute component={AccountMap} />
         </Route>
     </Router>
 );

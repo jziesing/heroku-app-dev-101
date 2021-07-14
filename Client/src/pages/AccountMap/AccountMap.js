@@ -5,9 +5,10 @@ let ajax = require('superagent');
 
 
 
-class HomePage extends React.Component {
 
-	constructor(props) {
+class AccountMap extends React.Component {
+
+    constructor(props) {
 		super(props);
 		this.state = {
             isLoading: false,
@@ -86,11 +87,11 @@ class HomePage extends React.Component {
         }
     }
 
-
 	render() {
 
 
-		return (
+
+        return (
 			<div>
 				<div class="row">
 	                <div class="text-center">
@@ -113,4 +114,4 @@ class HomePage extends React.Component {
 	}
 }
 
-export default HomePage;
+export default AccountMap;

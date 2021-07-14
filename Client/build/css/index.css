@@ -102,3 +102,18 @@ body {
 	color: #fff;
 	background-color: #148CB8;
 }
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+#gout:hover {
+    color: #FF5533;
+    background-color: #FF5533;
+    fill: #FF5533;
+}
+
+g#gout:not(:hover) text {
+    opacity: 0;
+}

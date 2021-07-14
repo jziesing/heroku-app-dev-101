@@ -25243,7 +25243,9 @@
 	    IndexRoute = ReactRouter.IndexRoute,
 	    browserHistory = ReactRouter.browserHistory,
 	    Layout = __webpack_require__(81),
-	    HomePage = __webpack_require__(83);
+	    AccountMap = __webpack_require__(83),
+	    NewAccount = __webpack_require__(91),
+	    NewExtData = __webpack_require__(92);
 
 	module.exports = React.createElement(
 	    Router,
@@ -25251,7 +25253,7 @@
 	    React.createElement(
 	        Route,
 	        { path: '/', component: Layout },
-	        React.createElement(IndexRoute, { component: HomePage })
+	        React.createElement(IndexRoute, { component: AccountMap })
 	    )
 	);
 
@@ -32377,52 +32379,8 @@
 		}
 
 		_createClass(Layout, [{
-			key: 'navMarkup',
-			value: function navMarkup() {
-
-				var currLocc = this.props.location.pathname;
-				console.log(currLocc);
-
-				console.log(this.props.location);
-				switch (currLocc) {
-					case '':
-					case '/':
-						return _react2.default.createElement(
-							'ul',
-							{ className: 'nav navbar-nav navbar-right' },
-							_react2.default.createElement(
-								'li',
-								{ className: 'active' },
-								_react2.default.createElement(
-									_reactRouter.Link,
-									{ to: '/' },
-									'Heroku Intro'
-								)
-							)
-						);
-						break;
-					default:
-						return _react2.default.createElement(
-							'ul',
-							{ className: 'nav navbar-nav navbar-right' },
-							_react2.default.createElement(
-								'li',
-								{ className: 'active' },
-								_react2.default.createElement(
-									_reactRouter.Link,
-									{ to: '/' },
-									'Heroku Intro'
-								)
-							)
-						);
-						break;
-				}
-			}
-		}, {
 			key: 'render',
 			value: function render() {
-
-				var pageNavMarkup = this.navMarkup();
 
 				return _react2.default.createElement(
 					'html',
@@ -32439,7 +32397,7 @@
 						_react2.default.createElement(
 							'title',
 							null,
-							'Heroku Intro'
+							'Account Map'
 						)
 					),
 					_react2.default.createElement(
@@ -32475,7 +32433,19 @@
 								_react2.default.createElement(
 									'div',
 									{ id: 'navbar', className: 'navbar-collapse collapse' },
-									pageNavMarkup
+									_react2.default.createElement(
+										'ul',
+										{ className: 'nav navbar-nav navbar-right' },
+										_react2.default.createElement(
+											'li',
+											{ className: 'active' },
+											_react2.default.createElement(
+												_reactRouter.Link,
+												{ to: '/' },
+												'Heroku Intro'
+											)
+										)
+									)
 								)
 							)
 						),
@@ -32542,7 +32512,7 @@
 	                    _react2.default.createElement(
 	                        "p",
 	                        { className: "text-muted" },
-	                        "Tap Room Map - Jack Ziesing HEAT app"
+	                        "Account Map - HC Demo"
 	                    )
 	                )
 	            );
@@ -32581,13 +32551,13 @@
 
 	var ajax = __webpack_require__(84);
 
-	var HomePage = function (_React$Component) {
-	    _inherits(HomePage, _React$Component);
+	var AccountMap = function (_React$Component) {
+	    _inherits(AccountMap, _React$Component);
 
-	    function HomePage(props) {
-	        _classCallCheck(this, HomePage);
+	    function AccountMap(props) {
+	        _classCallCheck(this, AccountMap);
 
-	        var _this = _possibleConstructorReturn(this, (HomePage.__proto__ || Object.getPrototypeOf(HomePage)).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (AccountMap.__proto__ || Object.getPrototypeOf(AccountMap)).call(this, props));
 
 	        _this.state = {
 	            isLoading: false,
@@ -32597,7 +32567,7 @@
 	        return _this;
 	    }
 
-	    _createClass(HomePage, [{
+	    _createClass(AccountMap, [{
 	        key: 'componentWillMount',
 	        value: function componentWillMount() {
 
@@ -32764,10 +32734,10 @@
 	        }
 	    }]);
 
-	    return HomePage;
+	    return AccountMap;
 	}(_react2.default.Component);
 
-	exports.default = HomePage;
+	exports.default = AccountMap;
 	module.exports = exports['default'];
 
 /***/ }),
@@ -34842,6 +34812,517 @@
 
 	module.exports = Agent;
 
+
+/***/ }),
+/* 91 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(4);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ajax = __webpack_require__(84);
+
+	var NewAccount = function (_React$Component) {
+		_inherits(NewAccount, _React$Component);
+
+		function NewAccount(props) {
+			_classCallCheck(this, NewAccount);
+
+			var _this = _possibleConstructorReturn(this, (NewAccount.__proto__ || Object.getPrototypeOf(NewAccount)).call(this, props));
+
+			_this.state = {
+				isLoading: false,
+				name: '',
+				errormsg: '',
+				successmsg: ''
+			};
+			_this.handleFormChange = _this.handleFormChange.bind(_this);
+			_this.handleFormSubmit = _this.handleFormSubmit.bind(_this);
+			return _this;
+		}
+
+		_createClass(NewAccount, [{
+			key: 'handleFormChange',
+			value: function handleFormChange(event) {
+				console.log(this.state);
+				switch (event.target.id) {
+					case 'name':
+						this.setState({ name: event.target.value });
+						break;
+				}
+			}
+		}, {
+			key: 'validateForm',
+			value: function validateForm() {
+				if (this.state.name.length > 1) {
+					this.setState({ errormsg: '' });
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}, {
+			key: 'addErrors',
+			value: function addErrors() {
+				this.setState({ errormsg: 'Please add the Account name.  The name must be longer than 1 character' });
+			}
+		}, {
+			key: 'handleFormSubmit',
+			value: function handleFormSubmit(event) {
+				var _this2 = this;
+
+				event.preventDefault();
+				this.setState({ isLoading: true });
+				if (this.validateForm()) {
+					var contactEndUrl = '/new/account/';
+					ajax.post(contactEndUrl).set({ 'Content-Type': 'application/json' }).send(this.state).end(function (error, response) {
+						_this2.setState({ isLoading: false });
+						if (!error && response.status == 200) {
+							console.log('success');
+							console.log(response);
+							_this2.setState({
+								isLoading: false,
+								name: '',
+								successmsg: 'Success! Account added.',
+								errormsg: ''
+							});
+						} else {
+							console.log('fail');
+							console.log(error);
+							_this2.setState({
+								isLoading: false,
+								name: '',
+								successmsg: '',
+								errormsg: 'something went wrong, please try again.'
+							});
+						}
+					});
+				} else {
+					this.addErrors();
+					this.setState({ isLoading: false });
+				}
+			}
+		}, {
+			key: 'msgMarkup',
+			value: function msgMarkup() {
+				if (this.state.errormsg != '') {
+					return _react2.default.createElement(
+						'div',
+						{ className: 'alert alert-danger', role: 'alert' },
+						this.state.errormsg
+					);
+				} else if (this.state.successmsg != '') {
+					return _react2.default.createElement(
+						'div',
+						{ className: 'alert alert-success', role: 'alert' },
+						this.state.successmsg
+					);
+				}
+			}
+		}, {
+			key: 'markup',
+			value: function markup() {
+				if (this.state.isLoading) {
+					return _react2.default.createElement(
+						'form',
+						{ className: 'form-horizontal', action: '' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'col-sm-offset-4 col-sm-4' },
+							_react2.default.createElement('i', { className: 'fa fa-spinner fa-spin loadingCon' })
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'form-group' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'col-sm-offset-2 col-sm-10' },
+								_react2.default.createElement(
+									'button',
+									{ type: 'submit', className: 'btn btn-cSend disabled' },
+									'Send'
+								)
+							)
+						)
+					);
+				} else {
+					return _react2.default.createElement(
+						'form',
+						{ className: 'form-horizontal', action: '', onSubmit: this.handleFormSubmit },
+						_react2.default.createElement(
+							'div',
+							{ className: 'form-group' },
+							_react2.default.createElement(
+								'label',
+								{ htmlFor: 'message', className: 'col-sm-2 control-label' },
+								'Account Name'
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'col-sm-10' },
+								_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', placeholder: 'account name', onChange: this.handleFormChange, value: this.state.name })
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'form-group' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'col-sm-offset-2 col-sm-10' },
+								_react2.default.createElement(
+									'button',
+									{ type: 'submit', className: 'btn btn-cSend' },
+									'Send'
+								)
+							)
+						)
+					);
+				}
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'div',
+						{ className: 'row' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'text-center' },
+							_react2.default.createElement(
+								'h1',
+								null,
+								'Add a new Account'
+							)
+						)
+					),
+					this.msgMarkup(),
+					this.markup()
+				);
+			}
+		}]);
+
+		return NewAccount;
+	}(_react2.default.Component);
+
+	exports.default = NewAccount;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 92 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(4);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ajax = __webpack_require__(84);
+
+	var NewExtData = function (_React$Component) {
+	    _inherits(NewExtData, _React$Component);
+
+	    function NewExtData(props) {
+	        _classCallCheck(this, NewExtData);
+
+	        var _this = _possibleConstructorReturn(this, (NewExtData.__proto__ || Object.getPrototypeOf(NewExtData)).call(this, props));
+
+	        _this.state = {
+	            isLoading: true,
+	            accounts: [],
+	            name: '',
+	            ext_data_val: '',
+	            related_account: '',
+	            errormsg: '',
+	            successmsg: ''
+	        };
+	        _this.handleFormChange = _this.handleFormChange.bind(_this);
+	        _this.handleFormSubmit = _this.handleFormSubmit.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(NewExtData, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            var _this2 = this;
+
+	            this.setState({
+	                isLoading: true
+	            });
+	            var fetchAccountsURL = '/fetch/accounts/';
+	            ajax.get(fetchAccountsURL).end(function (error, response) {
+	                if (!error && response) {
+	                    console.log(JSON.parse(response.text));
+
+	                    var accs = JSON.parse(response.text);
+	                    _this2.setState({
+	                        isLoading: false,
+	                        accounts: accs
+	                    });
+	                } else {
+	                    console.log('Error fetching data', error);
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'handleFormChange',
+	        value: function handleFormChange(event) {
+	            console.log(this.state);
+	            switch (event.target.id) {
+	                case 'ext_data_val':
+	                    this.setState({ ext_data_val: event.target.value });
+	                    break;
+	                case 'extdatain':
+	                    console.log('safeee haven');
+	                    console.log(this.state.related_account);
+	                    console.log(event.target.value);
+	                    this.setState({ related_account: event.target.value });
+	                    break;
+	            }
+	        }
+	    }, {
+	        key: 'validateForm',
+	        value: function validateForm() {
+	            var retFlag = true;
+	            if (this.state.ext_data_val.length < 2) {
+	                this.setState({ errormsg: this.state.errormsg + 'Please add external data.' });
+	                retFlag = false;
+	            }
+
+	            console.log('this.state.related_account.length');
+	            console.log(this.state.related_account);
+	            if (this.state.related_account.length < 2) {
+	                this.setState({ errormsg: this.state.errormsg + '  Please select an account to relate this data to.' });
+	                retFlag = false;
+	            }
+	            return retFlag;
+	        }
+	    }, {
+	        key: 'handleFormSubmit',
+	        value: function handleFormSubmit(event) {
+	            var _this3 = this;
+
+	            event.preventDefault();
+	            this.setState({ isLoading: true });
+	            if (this.validateForm()) {
+	                var contactEndUrl = '/new/extdata/';
+	                ajax.post(contactEndUrl).set({ 'Content-Type': 'application/json' }).send({ account: this.state.related_account, data_val: this.state.ext_data_val }).end(function (error, response) {
+	                    _this3.setState({ isLoading: false });
+	                    if (!error && response.status == 200) {
+	                        console.log('success');
+	                        console.log(response);
+	                        _this3.setState({
+	                            isLoading: false,
+	                            name: '',
+	                            successmsg: 'Success! Data added.',
+	                            ext_data_val: '',
+	                            related_account: '',
+	                            errormsg: ''
+	                        });
+	                    } else {
+	                        console.log('fail');
+	                        console.log(error);
+	                        _this3.setState({
+	                            isLoading: false,
+	                            name: '',
+	                            successmsg: '',
+	                            errormsg: 'something went wrong, please try again.'
+	                        });
+	                    }
+	                });
+	            } else {
+	                this.setState({ isLoading: false });
+	            }
+	        }
+	    }, {
+	        key: 'msgMarkup',
+	        value: function msgMarkup() {
+	            if (this.state.errormsg != '') {
+	                return _react2.default.createElement(
+	                    'div',
+	                    { className: 'alert alert-danger', role: 'alert' },
+	                    this.state.errormsg
+	                );
+	            } else if (this.state.successmsg != '') {
+	                return _react2.default.createElement(
+	                    'div',
+	                    { className: 'alert alert-success', role: 'alert' },
+	                    this.state.successmsg
+	                );
+	            }
+	        }
+	    }, {
+	        key: 'accLiMarkup',
+	        value: function accLiMarkup() {
+	            var _this4 = this;
+
+	            if (this.state.accounts.length > 0) {
+	                return this.state.accounts.map(function (acc, index) {
+	                    if (acc.sfid == _this4.state.related_account) {
+	                        return _react2.default.createElement(
+	                            'option',
+	                            { key: index, value: acc.sfid, selected: true },
+	                            acc.name
+	                        );
+	                    } else {
+	                        return _react2.default.createElement(
+	                            'option',
+	                            { key: index, value: acc.sfid },
+	                            acc.name
+	                        );
+	                    }
+	                });
+	            }
+	        }
+	    }, {
+	        key: 'markup',
+	        value: function markup() {
+	            if (this.state.isLoading) {
+	                return _react2.default.createElement(
+	                    'form',
+	                    { className: 'form-horizontal', action: '' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'col-sm-offset-4 col-sm-4' },
+	                        _react2.default.createElement('i', { className: 'fa fa-spinner fa-spin loadingCon' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col-sm-offset-2 col-sm-10' },
+	                            _react2.default.createElement(
+	                                'button',
+	                                { type: 'submit', className: 'btn btn-cSend disabled' },
+	                                'Send'
+	                            )
+	                        )
+	                    )
+	                );
+	            } else {
+	                return _react2.default.createElement(
+	                    'form',
+	                    { className: 'form-horizontal', action: '', onSubmit: this.handleFormSubmit },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { htmlFor: 'message', className: 'col-sm-2 control-label' },
+	                            'Related Account'
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col-sm-10' },
+	                            _react2.default.createElement(
+	                                'select',
+	                                { className: 'form-control', id: 'extdatain', onChange: this.handleFormChange },
+	                                _react2.default.createElement(
+	                                    'option',
+	                                    null,
+	                                    'Please Select One'
+	                                ),
+	                                this.accLiMarkup()
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { htmlFor: 'message', className: 'col-sm-2 control-label' },
+	                            'External Data Item'
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col-sm-10' },
+	                            _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'ext_data_val', placeholder: 'text', onChange: this.handleFormChange, value: this.state.ext_data_val })
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col-sm-offset-2 col-sm-10' },
+	                            _react2.default.createElement(
+	                                'button',
+	                                { type: 'submit', className: 'btn btn-cSend' },
+	                                'Send'
+	                            )
+	                        )
+	                    )
+	                );
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'text-center' },
+	                        _react2.default.createElement(
+	                            'h1',
+	                            null,
+	                            'Add a new external data'
+	                        )
+	                    )
+	                ),
+	                this.msgMarkup(),
+	                this.markup()
+	            );
+	        }
+	    }]);
+
+	    return NewExtData;
+	}(_react2.default.Component);
+
+	exports.default = NewExtData;
+	module.exports = exports['default'];
 
 /***/ })
 /******/ ]);

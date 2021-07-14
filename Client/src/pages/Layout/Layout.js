@@ -9,34 +9,8 @@ class Layout extends React.Component {
 		super(props);
 	}
 
-	navMarkup() {
-
-		let currLocc = this.props.location.pathname;
-		console.log(currLocc);
-
-		console.log(this.props.location);
-		switch(currLocc) {
-			case '':
-			case '/':
-				return (
-					<ul class="nav navbar-nav navbar-right">
-						<li class="active"><Link to='/'>Heroku Intro</Link></li>
-					</ul>
-				);
-				break;
-			default:
-				return (
-					<ul class="nav navbar-nav navbar-right">
-						<li class="active"><Link to='/'>Heroku Intro</Link></li>
-					</ul>
-				);
-				break;
-		}
-	}
-
 	render() {
 
-		let pageNavMarkup = this.navMarkup();
 
 	    return (
 			<html>
@@ -47,7 +21,7 @@ class Layout extends React.Component {
     				<link href="/css/bootstrap.min.css" rel="stylesheet" />
     				<link href="/css/index.css" rel="stylesheet" />
     				<link href="/css/bstrapoverrides.css" rel="stylesheet" />
-	              	<title>Heroku Intro</title>
+	              	<title>Account Map</title>
 	          	</head>
 	          	<body>
 				    <nav class="navbar navbar-default navbar-fixed-top">
@@ -62,7 +36,9 @@ class Layout extends React.Component {
 								<Link to='/' activeClassName="navbar-brand">Heroku Intro</Link>
 							</div>
 							<div id="navbar" class="navbar-collapse collapse">
-								{ pageNavMarkup }
+								<ul class="nav navbar-nav navbar-right">
+									<li class="active"><Link to='/'>Heroku Intro</Link></li>
+								</ul>
 							</div>
 						</div>
 				    </nav>
