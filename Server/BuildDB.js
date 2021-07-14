@@ -1,9 +1,8 @@
-const pg = require('pg');
-const connectionString = process.env.DATABASE_URL;
+const { Client } = require('pg');
 
 
 let currclient = new Client({
-    connectionString: process.env.DATABASE_URL,
+    connectionString: process.env.DATABASE_URL_,
     ssl: {
         rejectUnauthorized: false
       }

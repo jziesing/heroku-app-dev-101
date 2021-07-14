@@ -36,8 +36,18 @@ class AccountMap extends React.Component {
 
     handleFormSubmit(event)  {
         this.setState({isLoading: true});
-        this.setState({btnClicked: true});
-        this.setState({isLoading: false});
+        let fetchAccountsURL = '/fetch/things/';
+        ajax.get(fetchAccountsURL)
+        	.end((error, response) => {
+          		if (!error && response) {
+                    console.log(JSON.parse(response.text));
+
+          		} else {
+              		console.log(`Error fetching data`, error);
+          		}
+                this.setState({btnClicked: true});
+                this.setState({isLoading: false});
+        	});
     }
 
     btnMarkup() {

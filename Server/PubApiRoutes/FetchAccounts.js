@@ -12,33 +12,16 @@ class FetchAccounts {
     constructor() {
         this.ahelper = new FetchAccountsHelper();
 		// methods
-        this.FetchAccountsGet = this.FetchAccountsGet.bind(this);
-        this.FetchChildAccountsGet = this.FetchChildAccountsGet.bind(this);
+        this.FetchThingsGet = this.FetchThingsGet.bind(this);
     }
     /*  @route: /fetch/accounts/
      *     - GET
      */
-    FetchAccountsGet(req, res) {
-        console.log('FetchAccountsGet');
+    FetchThingsGet(req, res) {
+        console.log('FetchThingsGet');
         res.setHeader('Content-Type', 'application/json');
 
-        return this.ahelper.fetchAccounts()
-                      .then(result => {
-                            console.log(result);
-                            return res.status(200).json(result);
-                      }).catch(err => {
-                            console.log(err);
-                            return res.sendStatus(400);
-                      });
-    }
-    /*  @route: /fetch/account/{parent_account_id}
-     *     - GET
-     */
-    FetchChildAccountsGet(req, res) {
-        console.log('FetchChildAccountsGet, account id :: ' + req.params.parentAccountId);
-        res.setHeader('Content-Type', 'application/json');
-
-        return this.ahelper.fetchChildAccounts(req.params.parentAccountId)
+        return this.ahelper.fetchThings()
                       .then(result => {
                             console.log(result);
                             return res.status(200).json(result);
