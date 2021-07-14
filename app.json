@@ -1,6 +1,6 @@
 {
   "name": "amn-heroku-intro",
-  "repository": "https://github.com/jziesing/heroku-web-node",
+  "repository": "https://github.com/jziesing/heroku-web-node/tree/has-db",
   "scripts": {
     "postdeploy": "node Server/BuildDB.js"
   },
