@@ -54,12 +54,12 @@ function start() {
         switch (newTitle) {
             case 'City':
                 for(let i=0; i<1500; i++)  {
-                    newThings.push([title: 'City', description: randomGen.city()])
+                    newThings.push([title: 'City', description: randomGen.city()]);
                 }
                 break;
             case 'Country':
                 for(let i=0; i<1500; i++)  {
-                    newThings.push([title: 'Country', description: randomCountry({ full: true })])
+                    newThings.push([title: 'Country', description: randomCountry({ full: true })]);
                 }
                 break;
             case 'Continent':
@@ -69,7 +69,7 @@ function start() {
                 break;
         }
         progress += 1;
-        job.progress(progress)
+        job.progress(progress);
     }
 
     let currclient = new Client({
