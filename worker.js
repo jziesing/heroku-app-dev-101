@@ -28,7 +28,7 @@ function start() {
 
   const REDIS_URL = process.env.REDIS_URL;
 
-  console.log('worker job startered')
+  console.log('worker job startered');
 
   let workQueue = new Queue('makethings', {
                                   redis: {
@@ -76,6 +76,8 @@ function start() {
         job.progress(progress);
     }
 
+    console.log('made day');
+
     let currclient = new Client({
             connectionString: process.env.DATABASE_URL,
             ssl: {
@@ -89,9 +91,11 @@ function start() {
 
     currclient.query(query1, (err, res) => {
         if (err){
+            console.log('db error');
             return { value: "error inserting  data" };
         }
         currclient.end();
+        console.log('db success');
         return { value: "inserted data" };
     });
 
@@ -99,6 +103,7 @@ function start() {
 
     // A job can return values that will be stored in Redis as JSON
     // This return value is unused in this demo application.
+    console.log('jobbb DoNNN');
     return { value: "jobbb  donnn" };
   });
 }
