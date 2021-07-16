@@ -26,7 +26,15 @@ function sleep(ms) {
 function start() {
   // Connect to the named work queue
 
-  let workQueue = new Queue('makethings', process.env.WEB_CONCURRENCY);
+  let workQueue = new Queue('makethings', {
+                                  redis: {
+                                      port: Number(REDIS_URL.split(':')[3]),
+                                      host: REDIS_URL.split(':')[2].split('@')[1],
+                                      password: REDIS_URL.split(':')[2].split('@')[0],
+                                      tls: {
+                                          rejectUnauthorized: false
+                                      }
+                                  }});
 
   workQueue.process(maxJobsPerWorker, async (job) => {
     // This is an example job that just slowly reports on progress

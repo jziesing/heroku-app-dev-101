@@ -19,7 +19,15 @@ class MakeThings {
         return new Promise(async function(resolve, reject) {
                 console.log('makeThingsHelperrrr');
                 console.log(process.env.REDIS_URL);
-                let workQueue = new Queue('makethings', process.env.WEB_CONCURRENCY);
+                let workQueue = new Queue('makethings', {
+                                                redis: {
+                                                    port: Number(redisURL.split(':')[3]),
+                                                    host: redisURL.split(':')[2].split('@')[1],
+                                                    password: redisURL.split(':')[2].split('@')[0],
+                                                    tls: {
+                                                        rejectUnauthorized: false
+                                                    }
+                                                }});
                 console.log('before awaiiddd');
                 workQueue.add()
                          .then(result => {
