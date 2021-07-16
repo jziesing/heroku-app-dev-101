@@ -32560,9 +32560,10 @@
 	        _this.state = {
 	            isLoading: false,
 	            btnClicked: false,
-	            things: null
+	            things: []
 	        };
 	        _this.handleFormSubmit = _this.handleFormSubmit.bind(_this);
+	        _this.handleMakeData = _this.handleMakeData.bind(_this);
 	        return _this;
 	    }
 
@@ -32572,8 +32573,8 @@
 	            var _this2 = this;
 
 	            this.setState({ isLoading: true });
-	            var fetchAccountsURL = '/fetch/things/';
-	            ajax.get(fetchAccountsURL).end(function (error, response) {
+	            var fetchThingsURL = '/fetch/things/';
+	            ajax.get(fetchThingsURL).end(function (error, response) {
 	                if (!error && response) {
 	                    console.log(JSON.parse(response.text));
 	                    _this2.setState({ things: JSON.parse(response.text) });
@@ -32585,6 +32586,26 @@
 	            });
 	        }
 	    }, {
+	        key: 'handleMakeData',
+	        value: function handleMakeData() {
+	            var _this3 = this;
+
+	            this.setState({ isLoading: true });
+	            var startJobURL = '/jobs/run/make-things';
+	            ajax.post(startJobURL).set({ 'Content-Type': 'application/json' }).send({}).end(function (error, response) {
+	                if (!error && response) {
+
+	                    console.log(_this3.state);
+	                    console.log(response.text);
+	                    // this.setState({things: JSON.parse(response.text)});
+	                } else {
+	                    console.log('Error fetching data', error);
+	                }
+	                _this3.setState({ btnClicked: true });
+	                _this3.setState({ isLoading: false });
+	            });
+	        }
+	    }, {
 	        key: 'btnMarkup',
 	        value: function btnMarkup() {
 	            if (this.state.isLoading) {
@@ -32593,7 +32614,7 @@
 	                    { className: 'form-horizontal', action: '' },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'col-sm-offset-4 col-sm-4' },
+	                        { className: 'form-group' },
 	                        _react2.default.createElement('i', { className: 'fa fa-spinner fa-spin loadingCon' })
 	                    ),
 	                    _react2.default.createElement(
@@ -32603,6 +32624,15 @@
 	                            'button',
 	                            { type: 'button', className: 'btn btn-cSend disabled' },
 	                            'Get Data'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement(
+	                            'button',
+	                            { type: 'button', className: 'btn btn-cSend disabled' },
+	                            'Make Data'
 	                        )
 	                    )
 	                );
@@ -32617,6 +32647,15 @@
 	                            'button',
 	                            { type: 'button', onClick: this.handleFormSubmit, className: 'btn btn-cSend' },
 	                            'Get Data'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement(
+	                            'button',
+	                            { type: 'button', onClick: this.handleMakeData, className: 'btn btn-cSend' },
+	                            'Make Data'
 	                        )
 	                    )
 	                );

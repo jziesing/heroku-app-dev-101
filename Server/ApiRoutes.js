@@ -5,9 +5,11 @@
 
 
 let express = require('express'),
-    PublicFetchThings = require('./PubApiRoutes/FetchThings'),
+    FetchThings = require('./PubApiRoutes/FetchThings'),
+	JobsDispatcher = require('./PubApiRoutes/JobsDispatcher'),
     ApiRoutes = express.Router(),
-    PubFetchThings = new PublicFetchThings();
+    Fetcher = new FetchThings(),
+	JobDispatch = new JobsDispatcher();
 
 
 
@@ -15,7 +17,9 @@ let express = require('express'),
  *  routes
  */
 // get things
-ApiRoutes.get("/fetch/things", PubFetchThings.FetchThingsGet);
+ApiRoutes.get("/fetch/things", Fetcher.FetchThingsGet);
+// start job
+ApiRoutes.post("/jobs/run/make-things", JobDispatch.MakeThings);
 
 /*
  * export

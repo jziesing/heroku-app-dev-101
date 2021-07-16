@@ -13,7 +13,7 @@ class HomePage extends React.Component {
 		this.state = {
             isLoading: false,
             btnClicked: false,
-            things: null,
+            things: [],
         };
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.handleMakeData = this.handleMakeData.bind(this);
@@ -21,8 +21,8 @@ class HomePage extends React.Component {
 
     handleFormSubmit(event)  {
         this.setState({isLoading: true});
-        let fetchAccountsURL = '/fetch/things/';
-        ajax.get(fetchAccountsURL)
+        let fetchThingsURL = '/fetch/things/';
+        ajax.get(fetchThingsURL)
         	.end((error, response) => {
           		if (!error && response) {
                     console.log(JSON.parse(response.text));
@@ -38,11 +38,15 @@ class HomePage extends React.Component {
 
     handleMakeData() {
         this.setState({isLoading: true});
-        let fetchAccountsURL = '/make/data/';
-        ajax.get(fetchAccountsURL)
+        let startJobURL = '/jobs/run/make-things';
+        ajax.post(startJobURL)
+			.set({ 'Content-Type': 'application/json' })
+			.send({})
         	.end((error, response) => {
           		if (!error && response) {
-                    console.log(JSON.parse(response.text));
+
+	                console.log(this.state);
+                    console.log(response.text);
                     // this.setState({things: JSON.parse(response.text)});
 
           		} else {
@@ -57,15 +61,14 @@ class HomePage extends React.Component {
 		if(this.state.isLoading) {
 			return (
 				<form class="form-horizontal" action="">
-					<div class="col-sm-offset-4 col-sm-4">
+					<div class="form-group">
 						<i class="fa fa-spinner fa-spin loadingCon" />
 					</div>
 					<div class="form-group">
-							<button type="button" class="btn btn-cSend disabled">Get Data</button>
+						<button type="button" class="btn btn-cSend disabled">Get Data</button>
 					</div>
-
 					<div class="form-group">
-							<button type="button" class="btn btn-cSend disabled">Make Data</button>
+						<button type="button" class="btn btn-cSend disabled">Make Data</button>
 					</div>
 				</form>
 			);
@@ -73,8 +76,10 @@ class HomePage extends React.Component {
 			return (
 				<form class="form-horizontal">
 					<div class="form-group">
-							<button type="button" onClick={this.handleFormSubmit} class="btn btn-cSend">Get Data</button>
-                            <button type="button" onClick={this.handleMakeData} class="btn btn-cSend">Make Data</button>
+						<button type="button" onClick={this.handleFormSubmit} class="btn btn-cSend">Get Data</button>
+					</div>
+					<div class="form-group">
+                        <button type="button" onClick={this.handleMakeData} class="btn btn-cSend">Make Data</button>
 					</div>
 				</form>
 			);
