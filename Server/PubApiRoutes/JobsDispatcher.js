@@ -21,16 +21,17 @@ class JobsDispatcher {
 		return new Promise(async function(resolve, reject) {
 
 
-			let workQueue = new Queue('makethings', {
-				redis: {
-					port: Number(redisURL.split(':')[3]),
-					host: redisURL.split(':')[2].split('@')[1],
-					password: redisURL.split(':')[2].split('@')[0],
-					tls: {
-						rejectUnauthorized: false
-					}
-				}
-			});
+			// let workQueue = new Queue('makethings', {
+			// 	redis: {
+			// 		port: Number(redisURL.split(':')[3]),
+			// 		host: redisURL.split(':')[2].split('@')[1],
+			// 		password: redisURL.split(':')[2].split('@')[0],
+			// 		tls: {
+			// 			rejectUnauthorized: false
+			// 		}
+			// 	}
+			// });
+			let workQueue = new Queue('makethings', redisURL);
 			let job = await workQueue.add();
 
 			// try {
