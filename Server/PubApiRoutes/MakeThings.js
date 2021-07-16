@@ -29,16 +29,17 @@ class MakeThings {
                                                     }
                                                 }});
                 console.log('before awaiiddd');
-                workQueue.add()
-                         .then(result => {
-                             console.log('SUCESSs added  worrkk!!!!');
-                              console.log(result);
-                              resolve(result);
-                         }).catch(err => {
-                             console.log('hit add  worrkk errorrr');
-                              console.log(err);
-                              reject(err);
-                         });
+                let job = workQueue.add();
+                // workQueue.add()
+                //          .then(result => {
+                //              console.log('SUCESSs added  worrkk!!!!');
+                //               console.log(result);
+                //               resolve(result);
+                //          }).catch(err => {
+                //              console.log('hit add  worrkk errorrr');
+                //               console.log(err);
+                //               reject(err);
+                //          });
                 // console.log('afterrr awaittt');
                 // resolve(job.id);
         });
