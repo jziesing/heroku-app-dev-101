@@ -3,6 +3,7 @@ let Queue = require("bull");
 var { Client } = require('pg');
 var randomCountry = require('random-country');
 var randomGen = require('random-world');
+const format = require('pg-format');
 
 // Connect to a local redis instance locally, and the Heroku-provided URL in production
 let REDIS_URL = process.env.REDIS_URL;
@@ -25,15 +26,7 @@ function sleep(ms) {
 function start() {
   // Connect to the named work queue
 
-  let workQueue = new Queue('makethings', {
-                                  redis: {
-                                      port: Number(REDIS_URL.split(':')[3]),
-                                      host: REDIS_URL.split(':')[2].split('@')[1],
-                                      password: REDIS_URL.split(':')[2].split('@')[0],
-                                      tls: {
-                                          rejectUnauthorized: false
-                                      }
-                                  }});
+  let workQueue = new Queue('makethings', process.env.WEB_CONCURRENCY);
 
   workQueue.process(maxJobsPerWorker, async (job) => {
     // This is an example job that just slowly reports on progress
@@ -80,7 +73,9 @@ function start() {
 
     currclient.connect();
 
-    currclient.query('INSERT INTO thing(title, description) VALUES($1, $2) RETURNING ID;', newThings,(err, res) => {
+    let query1 = format('INSERT INTO thing (title, description) VALUES %L returning id', newThings);
+
+    currclient.query(query1,(err, res) => {
         if (err){
             return { value: "error inserting  data" };
         }
