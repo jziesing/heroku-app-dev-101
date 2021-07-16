@@ -44,6 +44,7 @@ function start() {
 	var titles = ['Continent', 'Country', 'City'];
 	var continents = ['North America', 'South America', 'Australia', 'Asia', 'Africa', 'Antartica', 'Europe'];
 	var newThings =  [];
+	console.log(continents);
 	for(var i=0; i<15; i++) {
 
 		switch (titles[getRandomInt(3)]) {
