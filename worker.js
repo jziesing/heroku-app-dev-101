@@ -79,7 +79,8 @@ function start() {
 
     console.log('making data');
     let newThings = await makeLotsOfThings();
-
+    console.log('madeee data');
+    console.log(newThings);
     let currclient = new Client({
             connectionString: process.env.DATABASE_URL,
             ssl: {
