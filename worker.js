@@ -17,16 +17,12 @@ let workers = process.env.WEB_CONCURRENCY || 1;
 // to be tuned for your application. If each job is mostly waiting on network
 // responses it can be much higher. If each job is CPU-intensive, it might need
 // to be much lower.
-let maxJobsPerWorker = 50;
+let maxJobsPerWorker = 1;
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 function start() {
   // Connect to the named work queue
 
-  const REDIS_URL = process.env.REDIS_URL;
 
   console.log('worker job startered');
 
@@ -41,6 +37,7 @@ function start() {
                                   }});
 
   workQueue.process(maxJobsPerWorker, async (job) => {
+      console.log('process startered');
     // This is an example job that just slowly reports on progress
     // while doing no work. Replace this with your own job logic.
     let progress = 0;
