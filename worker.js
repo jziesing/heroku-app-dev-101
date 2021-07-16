@@ -40,7 +40,7 @@ function start() {
       console.log('process startered');
     // This is an example job that just slowly reports on progress
     // while doing no work. Replace this with your own job logic.
-    let progress = 0;
+    // let progress = 0;
 
     // throw an error 5% of the time
     // if (Math.random() < 0.05) {
@@ -102,7 +102,7 @@ function start() {
     // A job can return values that will be stored in Redis as JSON
     // This return value is unused in this demo application.
     console.log('jobbb DoNNN');
-    progress += 100;
+    // progress += 100;
     job.progress(progress);
     return { value: "jobbb  donnn" };
   });
