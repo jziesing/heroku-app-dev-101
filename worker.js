@@ -26,6 +26,8 @@ function sleep(ms) {
 function start() {
   // Connect to the named work queue
 
+  console.log('worker job startered')
+
   let workQueue = new Queue('makethings', {
                                   redis: {
                                       port: Number(REDIS_URL.split(':')[3]),
