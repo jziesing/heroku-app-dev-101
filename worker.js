@@ -52,6 +52,7 @@ function start() {
     for(let i=0; i<1500; i++) {
 
         let newTitle = titles[getRandomInt(3)];
+        console.log('newTitle :: ' + newTitle);
         switch (newTitle) {
             case 'City':
                 for(let i=0; i<1500; i++)  {
