@@ -6,11 +6,11 @@
 
 let express = require('express'),
 	JobsDispatcher = require('./PubApiRoutes/JobsDispatcher'),
-    ApiRoutes = express.Router(),
-	JobDispatch = new JobsDispatcher(),
     PublicFetchThings = require('./PubApiRoutes/FetchThings'),
     PublicMakeThings = require('./PubApiRoutes/MakeThings'),
+    ApiRoutes = express.Router(),
     PubFetchThings = new PublicFetchThings(),
+	JobDispatch = new JobsDispatcher(),
     PubMakeThings = new PublicMakeThings();
 
 

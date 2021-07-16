@@ -72,10 +72,6 @@ class HomePage extends React.Component {
 					<div class="form-group">
 						<button type="button" onClick={this.handleFormSubmit} class="btn btn-cSend">Get Data</button>
 					</div>
-					<div class="form-group">
-                        <button type="button" onClick={this.handleMakeData} class="btn btn-cSend">Make Data</button>
-							<button type="button" onClick={this.handleFormSubmit} class="btn btn-cSend">Get Data</button>
-					</div>
                     <div class="form-group">
                             <button type="button" onClick={this.handleMakeData} class="btn btn-cSend">Make Data</button>
 					</div>
