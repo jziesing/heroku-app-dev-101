@@ -36,8 +36,8 @@ function start() {
                                       }
                                   }});
 
-  workQueue.process(maxJobsPerWorker, (job) => {
-      console.log('process startered');
+  workQueue.process(maxJobsPerWorker, async (job) => {
+
     // This is an example job that just slowly reports on progress
     // while doing no work. Replace this with your own job logic.
     // let progress = 0;
