@@ -13,7 +13,8 @@ class HomePage extends React.Component {
 		this.state = {
             isLoading: false,
             btnClicked: false,
-            things: null,
+            things: [],
+            jobs: []
         };
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.handleMakeData = this.handleMakeData.bind(this);
@@ -25,31 +26,28 @@ class HomePage extends React.Component {
         ajax.get(fetchAccountsURL)
         	.end((error, response) => {
           		if (!error && response) {
-                    console.log(JSON.parse(response.text));
                     this.setState({things: JSON.parse(response.text)});
-
           		} else {
               		console.log(`Error fetching data`, error);
           		}
-                this.setState({btnClicked: true});
-                this.setState({isLoading: false});
+                this.setState({btnClicked: true, isLoading: false});
         	});
     }
 
-    handleMakeData() {
+    handleMakeData(event) {
         this.setState({isLoading: true});
-        let fetchAccountsURL = '/make/data/';
-        ajax.get(fetchAccountsURL)
+        let fetchAccountsURL = '/make/things/';
+        ajax.post(fetchAccountsURL)
+            .send({})
         	.end((error, response) => {
           		if (!error && response) {
-                    console.log(JSON.parse(response.text));
-                    // this.setState({things: JSON.parse(response.text)});
-
+                    let currJobs = this.state.jobs;
+                    currJobs.push(response);
+                    this.setState({jobs: currJobs});
           		} else {
               		console.log(`Error fetching data`, error);
           		}
-                this.setState({btnClicked: true});
-                this.setState({isLoading: false});
+                this.setState({btnClicked: true, isLoading: false});
         	});
     }
 
@@ -57,7 +55,7 @@ class HomePage extends React.Component {
 		if(this.state.isLoading) {
 			return (
 				<form class="form-horizontal" action="">
-					<div class="col-sm-offset-4 col-sm-4">
+					<div class="form-group">
 						<i class="fa fa-spinner fa-spin loadingCon" />
 					</div>
 					<div class="form-group">
@@ -74,6 +72,8 @@ class HomePage extends React.Component {
 				<form class="form-horizontal">
 					<div class="form-group">
 							<button type="button" onClick={this.handleFormSubmit} class="btn btn-cSend">Get Data</button>
+					</div>
+                    <div class="form-group">
                             <button type="button" onClick={this.handleMakeData} class="btn btn-cSend">Make Data</button>
 					</div>
 				</form>

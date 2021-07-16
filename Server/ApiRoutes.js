@@ -6,8 +6,10 @@
 
 let express = require('express'),
     PublicFetchThings = require('./PubApiRoutes/FetchThings'),
+    PublicMakeThings = require('./PubApiRoutes/MakeThings'),
     ApiRoutes = express.Router(),
-    PubFetchThings = new PublicFetchThings();
+    PubFetchThings = new PublicFetchThings(),
+    PubMakeThings = new PublicMakeThings();
 
 
 
@@ -17,6 +19,8 @@ let express = require('express'),
 // get things
 ApiRoutes.get("/fetch/things", PubFetchThings.FetchThingsGet);
 
+// get things
+ApiRoutes.post("/make/things", PubMakeThings.MakeThingsPost);
 /*
  * export
  */
