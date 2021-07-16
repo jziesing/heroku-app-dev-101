@@ -49,25 +49,19 @@ function start() {
     var titles = ['Continent', 'Country', 'City'];
     var continents = ['North America', 'South America', 'Australia', 'Asia', 'Africa', 'Antartica', 'Europe'];
     var newThings =  [];
-    for(var i=0; i<1500; i++) {
+    for(var i=0; i<15; i++) {
 
         let newTitle = titles[getRandomInt(3)];
         console.log('newTitle :: ' + newTitle);
         switch (newTitle) {
             case 'City':
-                for(let i=0; i<1500; i++)  {
-                    newThings.push(['City',  randomGen.city() ]);
-                }
+                newThings.push(['City',  randomGen.city() ]);
                 break;
             case 'Country':
-                for(let i=0; i<1500; i++)  {
-                    newThings.push(['Country',  randomCountry({ full: true }) ]);
-                }
+                newThings.push(['Country',  randomCountry({ full: true }) ]);
                 break;
             case 'Continent':
-                for(let i=0; i<1500; i++)  {
-                    newThings.push(['Continent',  continents[getRandomInt(7)] ]);
-                }
+                newThings.push(['Continent',  continents[getRandomInt(7)] ]);
                 break;
         }
 
