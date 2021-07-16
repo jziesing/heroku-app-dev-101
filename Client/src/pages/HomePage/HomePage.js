@@ -14,6 +14,7 @@ class HomePage extends React.Component {
             isLoading: false,
             btnClicked: false,
             things: [],
+            jobs: []
         };
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.handleMakeData = this.handleMakeData.bind(this);
@@ -25,18 +26,15 @@ class HomePage extends React.Component {
         ajax.get(fetchThingsURL)
         	.end((error, response) => {
           		if (!error && response) {
-                    console.log(JSON.parse(response.text));
                     this.setState({things: JSON.parse(response.text)});
-
           		} else {
               		console.log(`Error fetching data`, error);
           		}
-                this.setState({btnClicked: true});
-                this.setState({isLoading: false});
+                this.setState({btnClicked: true, isLoading: false});
         	});
     }
 
-    handleMakeData() {
+    handleMakeData(event) {
         this.setState({isLoading: true});
         let startJobURL = '/jobs/run/make-things';
         ajax.post(startJobURL)
@@ -47,13 +45,9 @@ class HomePage extends React.Component {
 
 	                console.log(this.state);
                     console.log(response.text);
-                    // this.setState({things: JSON.parse(response.text)});
-
-          		} else {
-              		console.log(`Error fetching data`, error);
-          		}
-                this.setState({btnClicked: true});
-                this.setState({isLoading: false});
+                    // this.setState({things: JSON.parse(response.text)});\
+				}
+				this.setState({btnClicked: true, isLoading: false});
         	});
     }
 
@@ -80,6 +74,10 @@ class HomePage extends React.Component {
 					</div>
 					<div class="form-group">
                         <button type="button" onClick={this.handleMakeData} class="btn btn-cSend">Make Data</button>
+							<button type="button" onClick={this.handleFormSubmit} class="btn btn-cSend">Get Data</button>
+					</div>
+                    <div class="form-group">
+                            <button type="button" onClick={this.handleMakeData} class="btn btn-cSend">Make Data</button>
 					</div>
 				</form>
 			);

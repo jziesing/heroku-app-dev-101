@@ -4,12 +4,9 @@
 "use strict";
 
 
-require('babel-register')({
-    presets: ['react', 'es2015', 'stage-0'],
-    plugins: ['react-html-attrs', 'add-module-exports']
-});
 
-require("babel-polyfill");
+
+// require("babel-polyfill");
 
 
 let express = require('express'),
@@ -30,6 +27,10 @@ app.use(bodyParser.json());
 app.use(apiRoutes);
 
 
+require('babel-register')({
+    presets: ['react', 'es2015', 'stage-0'],
+    plugins: ['react-html-attrs', 'add-module-exports']
+});
 
 let clientRouter = require('./ClientRouter');
 

@@ -3,6 +3,13 @@ let Queue = require("bull");
 
 // Connect to a local redis instance locally, and the Heroku-provided URL in production
 let redisURL = process.env.REDIS_URL;
+// var { Client } = require('pg');
+// var randomCountry = require('random-country');
+// var randomGen = require('random-world');
+// const format = require('pg-format');
+
+// Connect to a local redis instance locally, and the Heroku-provided URL in production
+
 
 // Spin up multiple processes to handle jobs to take advantage of more CPU cores
 // See: https://devcenter.heroku.com/articles/node-concurrency for more info
@@ -36,28 +43,26 @@ function start() {
 	var titles = ['Continent', 'Country', 'City'];
 	var continents = ['North America', 'South America', 'Australia', 'Asia', 'Africa', 'Antartica', 'Europe'];
 	var newThings =  [];
-
 	for(var i=0; i<15; i++) {
 
-          let newTitle = titles[getRandomInt(3)];
-          console.log('newTitle :: ' + newTitle);
-          switch (newTitle) {
-              case 'Continent':
-                  newThings.push(['Continent',  continents[getRandomInt(7)] ]);
-                  break;
-              default:
-                 break;
-          }
+		switch (titles[getRandomInt(3)]) {
+			case 'Continent':
+				newThings.push(['Continent',  continents[getRandomInt(7)] ]);
+				break;
+			default:
+			   break;
+		}
 
-      }
-	  console.log('job made data');
-	  console.log(newThings);
+	}
+	console.log('job made data');
+	console.log(newThings);
 
     // A job can return values that will be stored in Redis as JSON
     // This return value is unused in this demo application.
     return { value: "This will be stored" };
   });
 }
+
 
 // Initialize the clustered worker process
 // See: https://devcenter.heroku.com/articles/node-concurrency for more info
