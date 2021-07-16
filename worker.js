@@ -76,7 +76,8 @@ function start() {
         job.progress(progress);
     }
 
-    console.log('made day');
+    console.log('made data');
+    console.log(newThings[0]);
 
     let currclient = new Client({
             connectionString: process.env.DATABASE_URL,
