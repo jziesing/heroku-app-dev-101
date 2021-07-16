@@ -45,9 +45,9 @@ function start() {
     // if (Math.random() < 0.05) {
     //   throw new Error("This job failed!")
     // }
-    let titles = ['Continent', 'Country', 'City'];
-    let continents = ['North America', 'South America', 'Australia', 'Asia', 'Africa', 'Antartica', 'Europe'];
-    let newThings =  [];
+    const titles = ['Continent', 'Country', 'City'];
+    const continents = ['North America', 'South America', 'Australia', 'Asia', 'Africa', 'Antartica', 'Europe'];
+    var newThings =  [];
     for(let i=0; i<1500; i++) {
 
         let newTitle = titles[getRandomInt(3)];
