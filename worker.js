@@ -78,7 +78,7 @@ function start() {
 
 
     console.log('making data');
-    let newThings = makeLotsOfThings;
+    let newThings = await makeLotsOfThings();
 
     let currclient = new Client({
             connectionString: process.env.DATABASE_URL,
