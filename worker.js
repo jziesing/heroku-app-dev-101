@@ -19,6 +19,35 @@ let workers = process.env.WEB_CONCURRENCY || 1;
 // to be much lower.
 let maxJobsPerWorker = 1;
 
+function makeLotsOfThings(size) {
+  return new Promise((resolve, reject) => {
+
+      var titles = ['Continent', 'Country', 'City'];
+      var continents = ['North America', 'South America', 'Australia', 'Asia', 'Africa', 'Antartica', 'Europe'];
+      var newThings =  [];
+      for(var i=0; i<15; i++) {
+
+          let newTitle = titles[getRandomInt(3)];
+          console.log('newTitle :: ' + newTitle);
+          switch (newTitle) {
+              case 'City':
+                  newThings.push(['City',  randomGen.city() ]);
+                  break;
+              case 'Country':
+                  newThings.push(['Country',  randomCountry({ full: true }) ]);
+                  break;
+              case 'Continent':
+                  newThings.push(['Continent',  continents[getRandomInt(7)] ]);
+                  break;
+              default:
+                 break;
+          }
+
+      }
+      resolve(newThings);
+  });
+}
+
 
 function start() {
   // Connect to the named work queue
@@ -46,29 +75,10 @@ function start() {
     // if (Math.random() < 0.05) {
     //   throw new Error("This job failed!")
     // }
-    var titles = ['Continent', 'Country', 'City'];
-    var continents = ['North America', 'South America', 'Australia', 'Asia', 'Africa', 'Antartica', 'Europe'];
-    var newThings =  [];
-    for(var i=0; i<15; i++) {
 
-        let newTitle = titles[getRandomInt(3)];
-        console.log('newTitle :: ' + newTitle);
-        switch (newTitle) {
-            case 'City':
-                newThings.push(['City',  randomGen.city() ]);
-                break;
-            case 'Country':
-                newThings.push(['Country',  randomCountry({ full: true }) ]);
-                break;
-            case 'Continent':
-                newThings.push(['Continent',  continents[getRandomInt(7)] ]);
-                break;
-        }
 
-    }
-
-    console.log('made data');
-    console.log(newThings[0]);
+    console.log('making data');
+    let newThings = makeLotsOfThings;
 
     let currclient = new Client({
             connectionString: process.env.DATABASE_URL,
