@@ -6,7 +6,7 @@ let ajax = require('superagent');
 
 
 
-class AccountMap extends React.Component {
+class HomePage extends React.Component {
 
     constructor(props) {
 		super(props);
@@ -18,9 +18,6 @@ class AccountMap extends React.Component {
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.handleMakeData = this.handleMakeData.bind(this);
 	}
-
-    componentWillMount() {
-  	}
 
     handleFormSubmit(event)  {
         this.setState({isLoading: true});
@@ -126,7 +123,7 @@ class AccountMap extends React.Component {
 				<div class="row">
 	                <div class="text-center">
 	                    <h1>Heroku Intro</h1>
-                        <p>you deployed a heroku web app!</p>
+                        <p>Now click the button to get data from your database..</p>
 	                </div>
 		    	</div>
                 <div class="row">
@@ -144,4 +141,4 @@ class AccountMap extends React.Component {
 	}
 }
 
-export default AccountMap;
+export default HomePage;

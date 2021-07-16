@@ -21,7 +21,7 @@ class Layout extends React.Component {
     				<link href="/css/bootstrap.min.css" rel="stylesheet" />
     				<link href="/css/index.css" rel="stylesheet" />
     				<link href="/css/bstrapoverrides.css" rel="stylesheet" />
-	              	<title>Heroku Intro</title>
+	              	<title>Heroku App Dev 101</title>
 	          	</head>
 	          	<body>
 				    <nav class="navbar navbar-default navbar-fixed-top">
@@ -33,11 +33,11 @@ class Layout extends React.Component {
 									<span class="icon-bar"></span>
 									<span class="icon-bar"></span>
 								</button>
-								<Link to='/' activeClassName="navbar-brand">Heroku Intro</Link>
+								<Link to='/' activeClassName="navbar-brand">Heroku App Dev 101</Link>
 							</div>
 							<div id="navbar" class="navbar-collapse collapse">
 								<ul class="nav navbar-nav navbar-right">
-									<li class="active"><Link to='/'>Heroku Intro</Link></li>
+									<li class="active"><Link to='/'>Heroku App Dev 101</Link></li>
 								</ul>
 							</div>
 						</div>

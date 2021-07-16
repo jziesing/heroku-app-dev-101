@@ -1,26 +1,27 @@
 /*
- * @AddExtData.js
+ * @FetchThings.js
  */
 "use strict";
 
 
-let AddExtDataHelper = require('./AddExtDataHelper');
+let FetchThingsHelper = require('./FetchThingsHelper');
+const { Client } = require('pg');
 
-
-class AddExtData {
+class FetchThings {
 
     constructor() {
-        this.ahelper = new AddExtDataHelper();
+        this.ahelper = new FetchThingsHelper();
 		// methods
-        this.AddExtDataPost = this.AddExtDataPost.bind(this);
+        this.FetchThingsGet = this.FetchThingsGet.bind(this);
     }
-    /*  @route: /new/account
-     *     - POST
+    /*  @route: /fetch/things/
+     *     - GET
      */
-    AddExtDataPost(req, res) {
-        console.log('AddExtDataPost');
+    FetchThingsGet(req, res) {
+        console.log('FetchThingsGet');
         res.setHeader('Content-Type', 'application/json');
-        return this.ahelper.addExtDataPost(req.body)
+
+        return this.ahelper.fetchThings()
                       .then(result => {
                             console.log(result);
                             return res.status(200).json(result);
@@ -28,9 +29,8 @@ class AddExtData {
                             console.log(err);
                             return res.sendStatus(400);
                       });
-
     }
 
 }
 
-module.exports = AddExtData;
+module.exports = FetchThings;

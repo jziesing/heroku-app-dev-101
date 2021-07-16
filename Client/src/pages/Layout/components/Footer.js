@@ -7,7 +7,7 @@ class Footer extends React.Component {
         return (
             <footer class="globalFooter">
                 <div class="container footTextContainer">
-                    <p class="text-muted">Account Map - HC Demo</p>
+                    <p class="text-muted">Heroku App Dev 101</p>
                 </div>
             </footer>
         );
