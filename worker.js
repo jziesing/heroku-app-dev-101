@@ -10,7 +10,7 @@ let REDIS_URL = process.env.REDIS_URL;
 
 // Spin up multiple processes to handle jobs to take advantage of more CPU cores
 // See: https://devcenter.heroku.com/articles/node-concurrency for more info
-let workers = process.env.WEB_CONCURRENCY || 2;
+let workers = process.env.WEB_CONCURRENCY || 1;
 
 // The maximum number of jobs each worker should process at once. This will need
 // to be tuned for your application. If each job is mostly waiting on network
@@ -53,17 +53,17 @@ function start() {
         switch (newTitle) {
             case 'City':
                 for(let i=0; i<1500; i++)  {
-                    newThings.push({title: 'City', description: randomGen.city()})
+                    newThings.push([title: 'City', description: randomGen.city()])
                 }
                 break;
             case 'Country':
                 for(let i=0; i<1500; i++)  {
-                    newThings.push({title: 'Country', description: randomCountry({ full: true })})
+                    newThings.push([title: 'Country', description: randomCountry({ full: true })])
                 }
                 break;
             case 'Continent':
                 for(let i=0; i<1500; i++)  {
-                    newThings.push({title: 'Continent', description: continents[getRandomInt(7)]});
+                    newThings.push([title: 'Continent', description: continents[getRandomInt(7)]]);
                 }
                 break;
         }
