@@ -29,7 +29,8 @@ class MakeThings {
                                                     }
                                                 }});
                 console.log('before awaiiddd');
-                let job = workQueue.add();
+                let job = await workQueue.add();
+                resolve(job.id);
                 // workQueue.add()
                 //          .then(result => {
                 //              console.log('SUCESSs added  worrkk!!!!');
