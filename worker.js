@@ -54,17 +54,17 @@ function start() {
         switch (newTitle) {
             case 'City':
                 for(let i=0; i<1500; i++)  {
-                    newThings.push(['City', ''' + randomGen.city() +  ''']);
+                    newThings.push(['City',  randomGen.city() ]);
                 }
                 break;
             case 'Country':
                 for(let i=0; i<1500; i++)  {
-                    newThings.push(['Country', ''' + randomCountry({ full: true }) +  ''']);
+                    newThings.push(['Country',  randomCountry({ full: true }) ]);
                 }
                 break;
             case 'Continent':
                 for(let i=0; i<1500; i++)  {
-                    newThings.push(['Continent', ''' + continents[getRandomInt(7)] +  ''']);
+                    newThings.push(['Continent',  continents[getRandomInt(7)] ]);
                 }
                 break;
         }
