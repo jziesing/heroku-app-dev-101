@@ -69,8 +69,7 @@ function start() {
                 }
                 break;
         }
-        progress += 1;
-        job.progress(progress);
+
     }
 
     console.log('made data');
@@ -102,6 +101,8 @@ function start() {
     // A job can return values that will be stored in Redis as JSON
     // This return value is unused in this demo application.
     console.log('jobbb DoNNN');
+    progress += 100;
+    job.progress(progress);
     return { value: "jobbb  donnn" };
   });
 }
