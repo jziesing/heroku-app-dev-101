@@ -6,7 +6,7 @@ var randomGen = require('random-world');
 const format = require('pg-format');
 
 // Connect to a local redis instance locally, and the Heroku-provided URL in production
-let REDIS_URL = process.env.REDIS_URL;
+const REDIS_URL = process.env.REDIS_URL;
 
 
 // Spin up multiple processes to handle jobs to take advantage of more CPU cores
@@ -25,6 +25,8 @@ function sleep(ms) {
 
 function start() {
   // Connect to the named work queue
+
+  const REDIS_URL = process.env.REDIS_URL;
 
   console.log('worker job startered')
 
@@ -97,7 +99,7 @@ function start() {
 
     // A job can return values that will be stored in Redis as JSON
     // This return value is unused in this demo application.
-
+    return { value: "jobbb  donnn" };
   });
 }
 
