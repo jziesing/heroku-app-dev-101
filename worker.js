@@ -31,7 +31,7 @@ function start() {
                                       host: REDIS_URL.split(':')[2].split('@')[1],
                                       password: REDIS_URL.split(':')[2].split('@')[0],
                                       tls: {
-                                          servername: REDIS_URL.split(':')[2].split('@')[1]
+                                          rejectUnauthorized: false
                                       }
                                   }});
 
