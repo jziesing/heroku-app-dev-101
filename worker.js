@@ -30,7 +30,7 @@ workQueue.process((job, done) => {
   console.log(continents);
   for(let i=0; i<15; i++) {
 
-	  let newTitle = titles[getRandomInt(3)];
+	  let newTitle = titles[2];
 	  console.log('newTitle :: ' + newTitle);
 	  switch (newTitle) {
 		  // case 'City':
