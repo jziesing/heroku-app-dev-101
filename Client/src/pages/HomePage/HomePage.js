@@ -14,10 +14,13 @@ class HomePage extends React.Component {
             isLoading: false,
             btnClicked: false,
             things: [],
-            jobs: []
+            jobs: [],
+            jobid: 0,
+            addedJob: false;
         };
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.handleMakeData = this.handleMakeData.bind(this);
+        this.handleCheckJob = this.handleCheckJob.bind(this);
 	}
 
     handleFormSubmit(event)  {
@@ -34,6 +37,22 @@ class HomePage extends React.Component {
         	});
     }
 
+    handleCheckJob(event) {
+        this.setState({isLoading: true});
+        let startJobURL = '/job/' + this.state.jobid;
+        ajax.get(startJobURL)
+			.set({ 'Content-Type': 'application/json' })
+        	.end((error, response) => {
+          		if (!error && response) {
+
+	                console.log(this.state);
+                    console.log(response.text);
+                    // this.setState({things: JSON.parse(response.text)});\
+				}
+				this.setState({btnClicked: true, isLoading: false: });
+        	});
+    }
+
     handleMakeData(event) {
         this.setState({isLoading: true});
         let startJobURL = '/jobs/run/make-things';
@@ -45,7 +64,8 @@ class HomePage extends React.Component {
 
 	                console.log(this.state);
                     console.log(response.text);
-                    // this.setState({things: JSON.parse(response.text)});\
+                    let respndata =  JSON.parse(response.text);
+                    this.setState({jobid: respndata.jobid});
 				}
 				this.setState({btnClicked: true, isLoading: false});
         	});
@@ -64,9 +84,12 @@ class HomePage extends React.Component {
 					<div class="form-group">
 						<button type="button" class="btn btn-cSend disabled">Make Data</button>
 					</div>
+                    <div class="form-group">
+                            <button type="button" onClick={this.handleCheckJob} class="btn btn-cSend">Check Job</button>
+					</div>
 				</form>
 			);
-		} else {
+		} else if(this.state.addedJob) {
 			return (
 				<form class="form-horizontal">
 					<div class="form-group">
@@ -75,9 +98,26 @@ class HomePage extends React.Component {
                     <div class="form-group">
                             <button type="button" onClick={this.handleMakeData} class="btn btn-cSend">Make Data</button>
 					</div>
+                    <div class="form-group">
+                            <button type="button" onClick={this.handleCheckJob} class="btn btn-cSend">Check Job</button>
+					</div>
 				</form>
 			);
-		}
+		} else {
+            return (
+				<form class="form-horizontal">
+					<div class="form-group">
+						<button type="button" onClick={this.handleFormSubmit} class="btn btn-cSend">Get Data</button>
+					</div>
+                    <div class="form-group">
+                            <button type="button" onClick={this.handleMakeData} class="btn btn-cSend">Make Data</button>
+					</div>
+                    <div class="form-group">
+                            <button type="button" onClick={this.handleCheckJob} class="btn btn-cSend disabled">Check Job</button>
+					</div>
+				</form>
+			);
+        }
 	}
 
 

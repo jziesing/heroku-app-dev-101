@@ -98,7 +98,7 @@ function start() {
     // This return value is unused in this demo application.
     console.log('jobbb DoNNNeee');
     // progress += 100;
-    job.progress(progress);
+    job.progress(100);
     return { value: "jobbb  donnn" };
   });
 }
