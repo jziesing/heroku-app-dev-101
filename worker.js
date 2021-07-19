@@ -18,9 +18,9 @@ let workers = process.env.WEB_CONCURRENCY || 1;
 // to be much lower.
 let maxJobsPerWorker = 1;
 
-function makeLotsOfThings(size) {
+function makeLotsOfThings() {
     console.log('makeLotsOfThings STARTED');
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
 
       var titles = ['Continent', 'Country', 'City'];
       var continents = ['North America', 'South America', 'Australia', 'Asia', 'Africa', 'Antartica', 'Europe'];
