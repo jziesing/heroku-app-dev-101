@@ -49,7 +49,7 @@ class HomePage extends React.Component {
                     console.log(response.text);
                     // this.setState({things: JSON.parse(response.text)});\
 				}
-				this.setState({btnClicked: true, isLoading: false: });
+				this.setState({btnClicked: true, isLoading: false });
         	});
     }
 
