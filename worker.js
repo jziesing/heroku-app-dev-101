@@ -32,7 +32,21 @@ workQueue.process((job, done) => {
 
 	  let newTitle = titles[0];
 	  console.log('newTitle :: ' + newTitle);
-      newThings.push({'Continent':  continents[getRandomInt(6)]} );
+	  switch (newTitle) {
+		  // case 'City':
+		  //     newThings.push(['City',  randomGen.city() ]);
+		  //     break;
+		  // case 'Country':
+		  //     newThings.push(['Country',  randomCountry({ full: true }) ]);
+		  //     break;
+		  case 'Continent':
+			  newThings.push([{'Continent':  continents[getRandomInt(6)]} ]);
+			  break;
+		  default:
+			 break;
+	  }
+      i++;
+
   }
 
   console.log('madeee data');
