@@ -62,15 +62,15 @@ workQueue.process(async (job, done) => {
 	  switch (newTitle) {
 		  case 'City':
               console.log('hit City case');
-              newThings.push({'City':  randomGen.city() });
+              newThings.push(['City',  randomGen.city() ]);
 		      break;
 		  case 'Country':
               console.log('hit Country case');
-              newThings.push({'Country':  randomCountry({ full: true }) });
+              newThings.push(['Country',  randomCountry({ full: true })]);
 		      break;
 		  case 'Continent':
               console.log('hit continent case');
-			  newThings.push({'Continent':  continents[Math.floor(Math.random() * 7)]});
+			  newThings.push(['Continent',  continents[Math.floor(Math.random() * 7)]]);
 			  break;
 		  default:
 			 break;
