@@ -30,7 +30,7 @@ workQueue.process((job, done) => {
   console.log(continents);
   for(let i=0; i<15; i++) {
 
-	  let newTitle = titles[2];
+	  let newTitle = titles[0];
 	  console.log('newTitle :: ' + newTitle);
 	  switch (newTitle) {
 		  // case 'City':
@@ -40,7 +40,7 @@ workQueue.process((job, done) => {
 		  //     newThings.push(['Country',  randomCountry({ full: true }) ]);
 		  //     break;
 		  case 'Continent':
-			  newThings.push(['Continent',  continents[getRandomInt(7)] ]);
+			  newThings.push([{'Continent':  continents[getRandomInt(6)]} ]);
 			  break;
 		  default:
 			 break;
