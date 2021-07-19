@@ -19,60 +19,60 @@ let workers = process.env.WEB_CONCURRENCY || 1;
 // to be much lower.
 let maxJobsPerWorker = 1;
 
-function makeLotsOfThings() {
-    console.log('makeLotsOfThings STARTED');
-  return new Promise((resolve, reject) => {
-
-      var titles = ['Continent', 'Country', 'City'];
-      var continents = ['North America', 'South America', 'Australia', 'Asia', 'Africa', 'Antartica', 'Europe'];
-      var newThings =  [];
-      for(var i=0; i<15; i++) {
-
-          let newTitle = titles[getRandomInt(3)];
-          console.log('newTitle :: ' + newTitle);
-          switch (newTitle) {
-              // case 'City':
-              //     newThings.push(['City',  randomGen.city() ]);
-              //     break;
-              // case 'Country':
-              //     newThings.push(['Country',  randomCountry({ full: true }) ]);
-              //     break;
-              case 'Continent':
-                  newThings.push(['Continent',  continents[getRandomInt(7)] ]);
-                  break;
-              default:
-                 break;
-          }
-
-      }
-
-      console.log('madeee data');
-      console.log(newThings);
-      let currclient = new Client({
-              connectionString: process.env.DATABASE_URL,
-              ssl: {
-                  rejectUnauthorized: false
-                }
-          });
-
-      currclient.connect();
-
-      let query1 = format('INSERT INTO thing (title, description) VALUES %L returning id', newThings);
-
-      currclient.query(query1, (err, res) => {
-          if (err){
-              console.log('db error');
-              // return { value: "error inserting  data" };
-              resolve(err);
-          }
-          currclient.end();
-          console.log('db success');
-          resolve("inserted data");
-          // return { value: "inserted data" };
-      });
-
-  });
-}
+// function makeLotsOfThings() {
+//     console.log('makeLotsOfThings STARTED');
+//   return new Promise((resolve, reject) => {
+//
+//       var titles = ['Continent', 'Country', 'City'];
+//       var continents = ['North America', 'South America', 'Australia', 'Asia', 'Africa', 'Antartica', 'Europe'];
+//       var newThings =  [];
+//       for(var i=0; i<15; i++) {
+//
+//           let newTitle = titles[getRandomInt(3)];
+//           console.log('newTitle :: ' + newTitle);
+//           switch (newTitle) {
+//               // case 'City':
+//               //     newThings.push(['City',  randomGen.city() ]);
+//               //     break;
+//               // case 'Country':
+//               //     newThings.push(['Country',  randomCountry({ full: true }) ]);
+//               //     break;
+//               case 'Continent':
+//                   newThings.push(['Continent',  continents[getRandomInt(7)] ]);
+//                   break;
+//               default:
+//                  break;
+//           }
+//
+//       }
+//
+//       console.log('madeee data');
+//       console.log(newThings);
+//       let currclient = new Client({
+//               connectionString: process.env.DATABASE_URL,
+//               ssl: {
+//                   rejectUnauthorized: false
+//                 }
+//           });
+//
+//       currclient.connect();
+//
+//       let query1 = format('INSERT INTO thing (title, description) VALUES %L returning id', newThings);
+//
+//       currclient.query(query1, (err, res) => {
+//           if (err){
+//               console.log('db error');
+//               // return { value: "error inserting  data" };
+//               resolve(err);
+//           }
+//           currclient.end();
+//           console.log('db success');
+//           resolve("inserted data");
+//           // return { value: "inserted data" };
+//       });
+//
+//   });
+// }
 
 console.log('worker job startered');
 
@@ -123,7 +123,7 @@ workQueue.process((job, done) => {
   console.log('jobbb DoNNNeee');
   // progress += 100;
   job.progress(100);
-  done();
+  done(true);
   // return { value: "jobbb  donnn" };
 });
 

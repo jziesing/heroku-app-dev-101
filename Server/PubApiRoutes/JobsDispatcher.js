@@ -16,12 +16,12 @@ class JobsDispatcher {
 
 	MakeThingsHelper() {
 		let redisURL = process.env.REDIS_URL;
-		let workQueue = new Queue('makethings', process.env.REDIS_URL);
+		//let workQueue = new Queue('makethings', process.env.REDIS_URL);
 
 		return new Promise(async function(resolve, reject) {
 
 			let workQueue = new Queue('makethings', redisURL);
-			let job = await workQueue.add('some thing');
+			let job = await workQueue.add({ jname: 'jackkkk'});
 
 			resolve({jobid: job.id});
 
