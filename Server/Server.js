@@ -6,6 +6,8 @@
 
 
 
+// require("babel-polyfill");
+
 
 let express = require('express'),
 	bodyParser = require('body-parser'),
@@ -29,7 +31,6 @@ require('babel-register')({
     presets: ['react', 'es2015', 'stage-0'],
     plugins: ['react-html-attrs', 'add-module-exports']
 });
-
 
 let clientRouter = require('./ClientRouter');
 

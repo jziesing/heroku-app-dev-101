@@ -5,7 +5,6 @@
 
 
 let FetchThingsHelper = require('./FetchThingsHelper');
-const { Client } = require('pg');
 
 class FetchThings {
 
