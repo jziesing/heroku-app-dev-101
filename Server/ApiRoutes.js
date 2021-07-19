@@ -22,7 +22,7 @@ ApiRoutes.get("/fetch/things", PubFetchThings.FetchThingsGet);
 // start job
 ApiRoutes.post("/jobs/run/make-things", JobDispatch.MakeThings);
 
-app.get('/job/:id', async (req, res) => {
+ApiRoutes.get('/job/:id', async (req, res) => {
   let id = req.params.id;
   let job = await workQueue.getJob(id);
 
