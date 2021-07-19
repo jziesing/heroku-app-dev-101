@@ -36,7 +36,7 @@ ApiRoutes.get('/job/:id', async (req, res) => {
   	  console.log('after state call');
     let progress = job._progress;
     let reason = job.failedReason;
-    res.json({ id, state, progress, reason });
+    res.status(200).json({ id, state, progress, reason });
   }
 });
 
