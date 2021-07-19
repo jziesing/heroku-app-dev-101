@@ -73,64 +73,117 @@ function makeLotsOfThings() {
   });
 }
 
+console.log('worker job startered');
 
-function start() {
-  // Connect to the named work queue
+let workQueue = new Queue('makethings', process.env.REDIS_URL);
+
+workQueue.process((job, done) => {
+
+  // This is an example job that just slowly reports on progress
+  // while doing no work. Replace this with your own job logic.
+  // let progress = 0;
+
+  // throw an error 5% of the time
+  // if (Math.random() < 0.05) {
+  //   throw new Error("This job failed!")
+  // }
+  console.log('making data');
+  console.log(job);
+  // let newThings = await makeLotsOfThings();
+
+  var titles = ['Continent', 'Country', 'City'];
+  var continents = ['North America', 'South America', 'Australia', 'Asia', 'Africa', 'Antartica', 'Europe'];
+  var newThings =  [];
+  for(var i=0; i<15; i++) {
+
+	  let newTitle = titles[getRandomInt(3)];
+	  console.log('newTitle :: ' + newTitle);
+	  switch (newTitle) {
+		  // case 'City':
+		  //     newThings.push(['City',  randomGen.city() ]);
+		  //     break;
+		  // case 'Country':
+		  //     newThings.push(['Country',  randomCountry({ full: true }) ]);
+		  //     break;
+		  case 'Continent':
+			  newThings.push(['Continent',  continents[getRandomInt(7)] ]);
+			  break;
+		  default:
+			 break;
+	  }
+
+  }
+
+  console.log('madeee data');
+  console.log(newThings);
+
+  // A job can return values that will be stored in Redis as JSON
+  // This return value is unused in this demo application.
+  console.log('jobbb DoNNNeee');
+  // progress += 100;
+  job.progress(100);
+  done();
+  // return { value: "jobbb  donnn" };
+});
 
 
-  console.log('worker job startered');
-
-  let workQueue = new Queue('makethings', process.env.REDIS_URL);
-
-  workQueue.process(maxJobsPerWorker, (job, done) => {
-
-    // This is an example job that just slowly reports on progress
-    // while doing no work. Replace this with your own job logic.
-    // let progress = 0;
-
-    // throw an error 5% of the time
-    // if (Math.random() < 0.05) {
-    //   throw new Error("This job failed!")
-    // }
-    console.log('making data');
-    // let newThings = await makeLotsOfThings();
-
-    var titles = ['Continent', 'Country', 'City'];
-    var continents = ['North America', 'South America', 'Australia', 'Asia', 'Africa', 'Antartica', 'Europe'];
-    var newThings =  [];
-    for(var i=0; i<15; i++) {
-
-        let newTitle = titles[getRandomInt(3)];
-        console.log('newTitle :: ' + newTitle);
-        switch (newTitle) {
-            // case 'City':
-            //     newThings.push(['City',  randomGen.city() ]);
-            //     break;
-            // case 'Country':
-            //     newThings.push(['Country',  randomCountry({ full: true }) ]);
-            //     break;
-            case 'Continent':
-                newThings.push(['Continent',  continents[getRandomInt(7)] ]);
-                break;
-            default:
-               break;
-        }
-
-    }
-
-    console.log('madeee data');
-    console.log(newThings);
-
-    // A job can return values that will be stored in Redis as JSON
-    // This return value is unused in this demo application.
-    console.log('jobbb DoNNNeee');
-    // progress += 100;
-    job.progress(100);
-    done();
-    // return { value: "jobbb  donnn" };
-  });
-}
+// function start() {
+//   // Connect to the named work queue
+//
+//
+//   console.log('worker job startered');
+//
+//   let workQueue = new Queue('makethings', process.env.REDIS_URL);
+//
+//   workQueue.process(maxJobsPerWorker, (job, done) => {
+//
+//     // This is an example job that just slowly reports on progress
+//     // while doing no work. Replace this with your own job logic.
+//     // let progress = 0;
+//
+//     // throw an error 5% of the time
+//     // if (Math.random() < 0.05) {
+//     //   throw new Error("This job failed!")
+//     // }
+//     console.log('making data');
+//     // let newThings = await makeLotsOfThings();
+//
+//     var titles = ['Continent', 'Country', 'City'];
+//     var continents = ['North America', 'South America', 'Australia', 'Asia', 'Africa', 'Antartica', 'Europe'];
+//     var newThings =  [];
+//     for(var i=0; i<15; i++) {
+//
+//         let newTitle = titles[getRandomInt(3)];
+//         console.log('newTitle :: ' + newTitle);
+//         switch (newTitle) {
+//             // case 'City':
+//             //     newThings.push(['City',  randomGen.city() ]);
+//             //     break;
+//             // case 'Country':
+//             //     newThings.push(['Country',  randomCountry({ full: true }) ]);
+//             //     break;
+//             case 'Continent':
+//                 newThings.push(['Continent',  continents[getRandomInt(7)] ]);
+//                 break;
+//             default:
+//                break;
+//         }
+//
+//     }
+//
+//     console.log('madeee data');
+//     console.log(newThings);
+//
+//     // A job can return values that will be stored in Redis as JSON
+//     // This return value is unused in this demo application.
+//     console.log('jobbb DoNNNeee');
+//     // progress += 100;
+//     job.progress(100);
+//     done();
+//     // return { value: "jobbb  donnn" };
+//   });
+// }
 
 // Initialize the clustered worker process
 // See: https://devcenter.heroku.com/articles/node-concurrency for more info
-throng({ workers, start });
+// throng({ workers, start });

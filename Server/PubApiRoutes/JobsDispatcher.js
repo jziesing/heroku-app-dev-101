@@ -21,7 +21,7 @@ class JobsDispatcher {
 		return new Promise(async function(resolve, reject) {
 
 			let workQueue = new Queue('makethings', redisURL);
-			let job = await workQueue.add();
+			let job = await workQueue.add('some thing');
 
 			resolve({jobid: job.id});
 
