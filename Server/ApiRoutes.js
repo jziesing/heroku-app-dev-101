@@ -23,13 +23,17 @@ ApiRoutes.get("/fetch/things", PubFetchThings.FetchThingsGet);
 ApiRoutes.post("/jobs/run/make-things", JobDispatch.MakeThings);
 
 ApiRoutes.get('/job/:id', async (req, res) => {
+	console.log('checking job');
   let id = req.params.id;
+  console.log('before job call');
   let job = await workQueue.getJob(id);
-
+	console.log('after job call');
   if (job === null) {
     res.status(404).end();
   } else {
+	  console.log('before state call');
     let state = await job.getState();
+  	  console.log('after state call');
     let progress = job._progress;
     let reason = job.failedReason;
     res.json({ id, state, progress, reason });
