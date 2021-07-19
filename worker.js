@@ -82,7 +82,7 @@ function start() {
 
   let workQueue = new Queue('makethings', process.env.REDIS_URL);
 
-  workQueue.process(maxJobsPerWorker, (job) => {
+  workQueue.process(maxJobsPerWorker, (job, done) => {
 
     // This is an example job that just slowly reports on progress
     // while doing no work. Replace this with your own job logic.
@@ -126,7 +126,8 @@ function start() {
     console.log('jobbb DoNNNeee');
     // progress += 100;
     job.progress(100);
-    return { value: "jobbb  donnn" };
+    done();
+    // return { value: "jobbb  donnn" };
   });
 }
 
