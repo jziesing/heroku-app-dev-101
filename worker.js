@@ -18,7 +18,34 @@ console.log('worker job startered');
 
 let workQueue = new Queue('makethings', process.env.REDIS_URL);
 
-workQueue.process((job, done) => {
+function insertData(newData) {
+    return new Promise((resolve, reject) => {
+        let currclient = new Client({
+              connectionString: process.env.DATABASE_URL,
+              ssl: {
+                  rejectUnauthorized: false
+                }
+          });
+
+        currclient.connect();
+
+        let query1 = format('INSERT INTO thing (title, description) VALUES %L returning id', newData);
+
+        currclient.query(query1, (err, res) => {
+          if (err){
+              console.log('db error');
+              // return { value: "error inserting  data" };
+              resolve(err);
+          }
+          currclient.end();
+          console.log('db success');
+          resolve("inserted data");
+          // return { value: "inserted data" };
+        });
+    });
+}
+
+workQueue.process(async (job, done) => {
 
   console.log('making data');
   console.log(job);
@@ -30,30 +57,32 @@ workQueue.process((job, done) => {
   console.log(continents);
   for(let i=0; i<15; i++) {
 
-	  let newTitle = titles[0];
+	  let newTitle = titles[Math.floor(Math.random() * 3)];
 	  console.log('newTitle :: ' + newTitle);
-
-
 	  switch (newTitle) {
-		  // case 'City':
-		  //     newThings.push(['City',  randomGen.city() ]);
-		  //     break;
-		  // case 'Country':
-		  //     newThings.push(['Country',  randomCountry({ full: true }) ]);
-		  //     break;
+		  case 'City':
+              console.log('hit City case');
+              newThings.push({'City':  randomGen.city() });
+		      break;
+		  case 'Country':
+              console.log('hit Country case');
+              newThings.push({'Country':  randomCountry({ full: true }) });
+		      break;
 		  case 'Continent':
               console.log('hit continent case');
-			  newThings.push([{'Continent':  continents[Math.floor(Math.random() * 7)]} ]);
+			  newThings.push({'Continent':  continents[Math.floor(Math.random() * 7)]});
 			  break;
 		  default:
 			 break;
 	  }
-      i++
+      i++;
 
   }
 
   console.log('madeee data');
   console.log(newThings);
+
+  let dbstuff = await insertData(newThings);
 
   // A job can return values that will be stored in Redis as JSON
   // This return value is unused in this demo application.
