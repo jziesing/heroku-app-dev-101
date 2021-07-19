@@ -2,9 +2,9 @@
 let Queue = require("bull");
 var { Client } = require('pg');
 
-// var randomCountry = require('random-country');
-// var randomGen = require('random-world');
-// const format = require('pg-format');
+var randomCountry = require('random-country');
+var randomGen = require('random-world');
+const format = require('pg-format');
 
 
 let workers = process.env.WEB_CONCURRENCY || 1;
