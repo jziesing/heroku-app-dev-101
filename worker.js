@@ -33,9 +33,22 @@ workQueue.process((job, done) => {
 	  let newTitle = titles[0];
 	  console.log('newTitle :: ' + newTitle);
 
-      newThings.push([{'Continent':  continents[1]} ]);
 
-      i++;
+	  switch (newTitle) {
+		  // case 'City':
+		  //     newThings.push(['City',  randomGen.city() ]);
+		  //     break;
+		  // case 'Country':
+		  //     newThings.push(['Country',  randomCountry({ full: true }) ]);
+		  //     break;
+		  case 'Continent':
+              console.log('hit continent case');
+			  newThings.push([{'Continent':  continents[Math.floor(Math.random() * 7)]} ]);
+			  break;
+		  default:
+			 break;
+	  }
+      i++
 
   }
 
