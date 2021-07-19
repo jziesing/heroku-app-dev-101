@@ -15,19 +15,10 @@ class MakeThings {
     }
 
     makeThingsHelper() {
-        const redisURL = process.env.REDIS_URL;
         return new Promise(async function(resolve, reject) {
                 console.log('makeThingsHelperrrr');
                 console.log(process.env.REDIS_URL);
-                let workQueue = new Queue('makethings', {
-                                                redis: {
-                                                    port: Number(redisURL.split(':')[3]),
-                                                    host: redisURL.split(':')[2].split('@')[1],
-                                                    password: redisURL.split(':')[2].split('@')[0],
-                                                    tls: {
-                                                        rejectUnauthorized: false
-                                                    }
-                                                }});
+                let workQueue = new Queue('makethings', process.env.REDIS_URL);
                 console.log('before awaiiddd');
                 let job = await workQueue.add();
                 resolve(job.id);

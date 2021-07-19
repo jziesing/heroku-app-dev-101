@@ -5,8 +5,7 @@ var randomCountry = require('random-country');
 var randomGen = require('random-world');
 const format = require('pg-format');
 
-// Connect to a local redis instance locally, and the Heroku-provided URL in production
-const REDIS_URL = process.env.REDIS_URL;
+
 
 
 // Spin up multiple processes to handle jobs to take advantage of more CPU cores
@@ -30,12 +29,12 @@ function makeLotsOfThings(size) {
           let newTitle = titles[getRandomInt(3)];
           console.log('newTitle :: ' + newTitle);
           switch (newTitle) {
-              case 'City':
-                  newThings.push(['City',  randomGen.city() ]);
-                  break;
-              case 'Country':
-                  newThings.push(['Country',  randomCountry({ full: true }) ]);
-                  break;
+              // case 'City':
+              //     newThings.push(['City',  randomGen.city() ]);
+              //     break;
+              // case 'Country':
+              //     newThings.push(['Country',  randomCountry({ full: true }) ]);
+              //     break;
               case 'Continent':
                   newThings.push(['Continent',  continents[getRandomInt(7)] ]);
                   break;
@@ -44,7 +43,32 @@ function makeLotsOfThings(size) {
           }
 
       }
-      resolve(newThings);
+
+      console.log('madeee data');
+      console.log(newThings);
+      let currclient = new Client({
+              connectionString: process.env.DATABASE_URL,
+              ssl: {
+                  rejectUnauthorized: false
+                }
+          });
+
+      currclient.connect();
+
+      let query1 = format('INSERT INTO thing (title, description) VALUES %L returning id', newThings);
+
+      currclient.query(query1, (err, res) => {
+          if (err){
+              console.log('db error');
+              // return { value: "error inserting  data" };
+              resolve(err);
+          }
+          currclient.end();
+          console.log('db success');
+          resolve("inserted data");
+          // return { value: "inserted data" };
+      });
+
   });
 }
 
@@ -55,15 +79,7 @@ function start() {
 
   console.log('worker job startered');
 
-  let workQueue = new Queue('makethings', {
-                                  redis: {
-                                      port: Number(REDIS_URL.split(':')[3]),
-                                      host: REDIS_URL.split(':')[2].split('@')[1],
-                                      password: REDIS_URL.split(':')[2].split('@')[0],
-                                      tls: {
-                                          rejectUnauthorized: false
-                                      }
-                                  }});
+  let workQueue = new Queue('makethings', process.env.REDIS_URL;);
 
   workQueue.process(maxJobsPerWorker, async (job) => {
 
@@ -75,38 +91,11 @@ function start() {
     // if (Math.random() < 0.05) {
     //   throw new Error("This job failed!")
     // }
-
-
     console.log('making data');
     let newThings = await makeLotsOfThings();
-    console.log('madeee data');
-    console.log(newThings);
-    let currclient = new Client({
-            connectionString: process.env.DATABASE_URL,
-            ssl: {
-                rejectUnauthorized: false
-              }
-        });
-
-    currclient.connect();
-
-    let query1 = format('INSERT INTO thing (title, description) VALUES %L returning id', newThings);
-
-    currclient.query(query1, (err, res) => {
-        if (err){
-            console.log('db error');
-            return { value: "error inserting  data" };
-        }
-        currclient.end();
-        console.log('db success');
-        return { value: "inserted data" };
-    });
-
-
-
     // A job can return values that will be stored in Redis as JSON
     // This return value is unused in this demo application.
-    console.log('jobbb DoNNN');
+    console.log('jobbb DoNNNeee');
     // progress += 100;
     job.progress(progress);
     return { value: "jobbb  donnn" };
