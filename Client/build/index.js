@@ -32561,10 +32561,13 @@
 	            isLoading: false,
 	            btnClicked: false,
 	            things: [],
-	            jobs: []
+	            jobs: [],
+	            jobid: 0,
+	            addedJob: false
 	        };
 	        _this.handleFormSubmit = _this.handleFormSubmit.bind(_this);
 	        _this.handleMakeData = _this.handleMakeData.bind(_this);
+	        _this.handleCheckJob = _this.handleCheckJob.bind(_this);
 	        return _this;
 	    }
 
@@ -32585,13 +32588,13 @@
 	            });
 	        }
 	    }, {
-	        key: 'handleMakeData',
-	        value: function handleMakeData(event) {
+	        key: 'handleCheckJob',
+	        value: function handleCheckJob(event) {
 	            var _this3 = this;
 
 	            this.setState({ isLoading: true });
-	            var startJobURL = '/jobs/run/make-things';
-	            ajax.post(startJobURL).set({ 'Content-Type': 'application/json' }).send({}).end(function (error, response) {
+	            var startJobURL = '/job/' + this.state.jobid;
+	            ajax.get(startJobURL).set({ 'Content-Type': 'application/json' }).end(function (error, response) {
 	                if (!error && response) {
 
 	                    console.log(_this3.state);
@@ -32599,6 +32602,24 @@
 	                    // this.setState({things: JSON.parse(response.text)});\
 	                }
 	                _this3.setState({ btnClicked: true, isLoading: false });
+	            });
+	        }
+	    }, {
+	        key: 'handleMakeData',
+	        value: function handleMakeData(event) {
+	            var _this4 = this;
+
+	            this.setState({ isLoading: true });
+	            var startJobURL = '/jobs/run/make-things';
+	            ajax.post(startJobURL).set({ 'Content-Type': 'application/json' }).send({}).end(function (error, response) {
+	                if (!error && response) {
+
+	                    console.log(_this4.state);
+	                    console.log(response.text);
+	                    var respndata = JSON.parse(response.text);
+	                    _this4.setState({ jobid: respndata.jobid, addedJob: true });
+	                }
+	                _this4.setState({ btnClicked: true, isLoading: false });
 	            });
 	        }
 	    }, {
@@ -32630,6 +32651,47 @@
 	                            { type: 'button', className: 'btn btn-cSend disabled' },
 	                            'Make Data'
 	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement(
+	                            'button',
+	                            { type: 'button', onClick: this.handleCheckJob, className: 'btn btn-cSend' },
+	                            'Check Job'
+	                        )
+	                    )
+	                );
+	            } else if (this.state.addedJob) {
+	                return _react2.default.createElement(
+	                    'form',
+	                    { className: 'form-horizontal' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement(
+	                            'button',
+	                            { type: 'button', onClick: this.handleFormSubmit, className: 'btn btn-cSend' },
+	                            'Get Data'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement(
+	                            'button',
+	                            { type: 'button', onClick: this.handleMakeData, className: 'btn btn-cSend' },
+	                            'Make Data'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement(
+	                            'button',
+	                            { type: 'button', onClick: this.handleCheckJob, className: 'btn btn-cSend' },
+	                            'Check Job'
+	                        )
 	                    )
 	                );
 	            } else {
@@ -32652,6 +32714,15 @@
 	                            'button',
 	                            { type: 'button', onClick: this.handleMakeData, className: 'btn btn-cSend' },
 	                            'Make Data'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement(
+	                            'button',
+	                            { type: 'button', onClick: this.handleCheckJob, className: 'btn btn-cSend disabled' },
+	                            'Check Job'
 	                        )
 	                    )
 	                );

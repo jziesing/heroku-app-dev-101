@@ -28,6 +28,7 @@ ApiRoutes.get('/job/:id', async (req, res) => {
   console.log('before job call');
   let job = await workQueue.getJob(id);
 	console.log('after job call');
+	console.log(job);
   if (job === null) {
     res.status(404).end();
   } else {
