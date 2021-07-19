@@ -16,7 +16,7 @@ class HomePage extends React.Component {
             things: [],
             jobs: [],
             jobid: 0,
-            addedJob: false;
+            addedJob: false
         };
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.handleMakeData = this.handleMakeData.bind(this);
