@@ -32560,12 +32560,8 @@
 	        _this.state = {
 	            isLoading: false,
 	            btnClicked: false,
-<<<<<<< HEAD
-	            things: []
-=======
 	            things: [],
 	            jobs: []
->>>>>>> 6a47464d7d8f5ca41718075094a00f6db6673449
 	        };
 	        _this.handleFormSubmit = _this.handleFormSubmit.bind(_this);
 	        _this.handleMakeData = _this.handleMakeData.bind(_this);
@@ -32594,36 +32590,15 @@
 	            var _this3 = this;
 
 	            this.setState({ isLoading: true });
-	            var fetchAccountsURL = '/make/things/';
-	            ajax.post(fetchAccountsURL).send({}).end(function (error, response) {
-	                if (!error && response) {
-	                    var currJobs = _this3.state.jobs;
-	                    currJobs.push(response);
-	                    _this3.setState({ jobs: currJobs });
-	                } else {
-	                    console.log('Error fetching data', error);
-	                }
-	                _this3.setState({ btnClicked: true, isLoading: false });
-	            });
-	        }
-	    }, {
-	        key: 'handleMakeData',
-	        value: function handleMakeData() {
-	            var _this3 = this;
-
-	            this.setState({ isLoading: true });
 	            var startJobURL = '/jobs/run/make-things';
 	            ajax.post(startJobURL).set({ 'Content-Type': 'application/json' }).send({}).end(function (error, response) {
 	                if (!error && response) {
 
 	                    console.log(_this3.state);
 	                    console.log(response.text);
-	                    // this.setState({things: JSON.parse(response.text)});
-	                } else {
-	                    console.log('Error fetching data', error);
+	                    // this.setState({things: JSON.parse(response.text)});\
 	                }
-	                _this3.setState({ btnClicked: true });
-	                _this3.setState({ isLoading: false });
+	                _this3.setState({ btnClicked: true, isLoading: false });
 	            });
 	        }
 	    }, {

@@ -19,6 +19,7 @@ let workers = process.env.WEB_CONCURRENCY || 1;
 let maxJobsPerWorker = 1;
 
 function makeLotsOfThings(size) {
+    console.log('makeLotsOfThings STARTED');
   return new Promise((resolve) => {
 
       var titles = ['Continent', 'Country', 'City'];
@@ -79,7 +80,7 @@ function start() {
 
   console.log('worker job startered');
 
-  let workQueue = new Queue('makethings', process.env.REDIS_URL;);
+  let workQueue = new Queue('makethings', process.env.REDIS_URL);
 
   workQueue.process(maxJobsPerWorker, async (job) => {
 
