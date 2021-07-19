@@ -65,7 +65,7 @@ class HomePage extends React.Component {
 	                console.log(this.state);
                     console.log(response.text);
                     let respndata =  JSON.parse(response.text);
-                    this.setState({jobid: respndata.jobid});
+                    this.setState({jobid: respndata.jobid, addedJob: true});
 				}
 				this.setState({btnClicked: true, isLoading: false});
         	});
