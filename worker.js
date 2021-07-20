@@ -58,7 +58,7 @@ function start() {
       let continents = ['North America', 'South America', 'Australia', 'Asia', 'Africa', 'Antartica', 'Europe'];
       let newThings =  [];
       console.log(continents);
-      for(let i=0; i<num_things; i++) {
+      for(let i=0; i<20; i++) {
     	  let newTitle = titles[Math.floor(Math.random() * 3)];
     	  switch (newTitle) {
     		  case 'City':
