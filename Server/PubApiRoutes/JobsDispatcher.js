@@ -14,14 +14,14 @@ class JobsDispatcher {
 		this.MakeThings = this.MakeThings.bind(this);
     }
 
-	MakeThingsHelper(size) {
+	MakeThingsHelper(number_things) {
 		let redisURL = process.env.REDIS_URL;
 		//let workQueue = new Queue('makethings', process.env.REDIS_URL);
 
 		return new Promise(async function(resolve, reject) {
 
 			let workQueue = new Queue('makethings', redisURL);
-			let job = await workQueue.add({ num_things: 'jackkkk'});
+			let job = await workQueue.add({ num_things: number_things});
 
 			resolve({jobid: job.id});
 

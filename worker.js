@@ -32,13 +32,11 @@ function insertData(newData) {
         currclient.query(query1, (err, res) => {
           if (err){
               console.log('db error');
-              // return { value: "error inserting  data" };
               resolve(err);
           }
           currclient.end();
           console.log('db success');
           resolve("inserted data");
-          // return { value: "inserted data" };
         });
     });
 }
@@ -53,48 +51,41 @@ function start() {
   workQueue.process(maxJobsPerWorker, async (job, done) => {
 
       console.log('making data');
-      console.log(job);
-      // let newThings = await makeLotsOfThings();
+      console.log(job.num_things);
+      let num_things = job.num_things;
 
       let titles = ['Continent', 'Country', 'City'];
       let continents = ['North America', 'South America', 'Australia', 'Asia', 'Africa', 'Antartica', 'Europe'];
       let newThings =  [];
       console.log(continents);
-      for(let i=0; i<15; i++) {
-
+      for(let i=0; i<num_things; i++) {
     	  let newTitle = titles[Math.floor(Math.random() * 3)];
-    	  console.log('newTitle :: ' + newTitle);
     	  switch (newTitle) {
     		  case 'City':
-                  console.log('hit City case');
+                  // console.log('hit City case');
                   newThings.push(['City',  randomGen.city() ]);
     		      break;
     		  case 'Country':
-                  console.log('hit Country case');
+                  // console.log('hit Country case');
                   newThings.push(['Country',  randomCountry({ full: true })]);
     		      break;
     		  case 'Continent':
-                  console.log('hit continent case');
+                  // console.log('hit continent case');
     			  newThings.push(['Continent',  continents[Math.floor(Math.random() * 7)]]);
     			  break;
     		  default:
     			 break;
     	  }
           i++;
-
       }
-
       console.log('madeee data');
       console.log(newThings);
-
       let dbstuff = await insertData(newThings);
 
-      // A job can return values that will be stored in Redis as JSON
-      // This return value is unused in this demo application.
       console.log('jobbb DoNNNeee');
-    job.progress(100);
-    done();
-    // return { value: "jobbb  donnn" };
+      job.progress(100);
+      done();
+      // return { value: "jobbb  donnn" };
   });
 }
 
