@@ -58,14 +58,14 @@ class HomePage extends React.Component {
         let startJobURL = '/jobs/run/make-things';
         ajax.post(startJobURL)
 			.set({ 'Content-Type': 'application/json' })
-			.send({})
+			.send({num_things: 20})
         	.end((error, response) => {
           		if (!error && response) {
 
 	                console.log(this.state);
                     console.log(response.text);
                     let respndata =  JSON.parse(response.text);
-                    this.setState({jobid: respndata.jobid, addedJob: true});
+                    this.setState({jobid: respndata.jobid, addedJob: false});
 				}
 				this.setState({btnClicked: true, isLoading: false});
         	});

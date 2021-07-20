@@ -50,7 +50,7 @@ function start() {
 
   let workQueue = new Queue('makethings', process.env.REDIS_URL);
 
-  workQueue.process(maxJobsPerWorker, (job, done) => {
+  workQueue.process(maxJobsPerWorker, async (job, done) => {
 
       console.log('making data');
       console.log(job);
