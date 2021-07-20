@@ -10,6 +10,8 @@ let express = require('express'),
     ApiRoutes = express.Router(),
     PubFetchThings = new PublicFetchThings(),
 	JobDispatch = new JobsDispatcher();
+    ApiRoutes = express.Router();
+
 
 	let Queue = require('bull');
 
@@ -43,6 +45,9 @@ ApiRoutes.get('/job/:id', async (req, res) => {
 
 // get things
 // ApiRoutes.post("/make/things", PubMakeThings.MakeThingsPost);
+// example route
+// ApiRoutes.get("/url/path/", ClassName.methodName);
+
 /*
  * export
  */

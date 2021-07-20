@@ -32788,7 +32788,29 @@
 	                    _react2.default.createElement(
 	                        'tbody',
 	                        null,
+<<<<<<< HEAD
 	                        this.tableData()
+=======
+	                        _react2.default.createElement(
+	                            'tr',
+	                            null,
+	                            _react2.default.createElement(
+	                                'th',
+	                                null,
+	                                '#'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                null,
+	                                'No'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                null,
+	                                'Database'
+	                            )
+	                        )
+>>>>>>> main
 	                    )
 	                );
 	            } else {
@@ -32811,7 +32833,7 @@
 	                        _react2.default.createElement(
 	                            'h1',
 	                            null,
-	                            'Heroku Intro'
+	                            'Heroku App Dev 101'
 	                        ),
 	                        _react2.default.createElement(
 	                            'p',
