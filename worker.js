@@ -51,8 +51,8 @@ function start() {
   workQueue.process(maxJobsPerWorker, async (job, done) => {
 
       console.log('making data');
-      console.log(job.num_things);
-      let num_things = job.num_things;
+      console.log(JSON.parse(job).num_things);
+      let num_things = JSON.parse(job).num_things;
 
       let titles = ['Continent', 'Country', 'City'];
       let continents = ['North America', 'South America', 'Australia', 'Asia', 'Africa', 'Antartica', 'Europe'];
