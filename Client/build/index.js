@@ -32559,16 +32559,68 @@
 
 	        _this.state = {
 	            isLoading: false,
-	            btnClicked: false
+	            btnClicked: false,
+	            things: [],
+	            jobs: [],
+	            jobid: 0,
+	            addedJob: false
 	        };
 	        _this.handleFormSubmit = _this.handleFormSubmit.bind(_this);
+	        _this.handleMakeData = _this.handleMakeData.bind(_this);
+	        _this.handleCheckJob = _this.handleCheckJob.bind(_this);
 	        return _this;
 	    }
 
 	    _createClass(HomePage, [{
 	        key: 'handleFormSubmit',
 	        value: function handleFormSubmit(event) {
-	            this.setState({ btnClicked: true });
+	            var _this2 = this;
+
+	            this.setState({ isLoading: true });
+	            var fetchThingsURL = '/fetch/things/';
+	            ajax.get(fetchThingsURL).end(function (error, response) {
+	                if (!error && response) {
+	                    _this2.setState({ things: JSON.parse(response.text) });
+	                } else {
+	                    console.log('Error fetching data', error);
+	                }
+	                _this2.setState({ btnClicked: true, isLoading: false });
+	            });
+	        }
+	    }, {
+	        key: 'handleCheckJob',
+	        value: function handleCheckJob(event) {
+	            var _this3 = this;
+
+	            this.setState({ isLoading: true });
+	            var startJobURL = '/job/' + this.state.jobid;
+	            ajax.get(startJobURL).set({ 'Content-Type': 'application/json' }).end(function (error, response) {
+	                if (!error && response) {
+
+	                    console.log(_this3.state);
+	                    console.log(response.text);
+	                    // this.setState({things: JSON.parse(response.text)});\
+	                }
+	                _this3.setState({ btnClicked: true, isLoading: false });
+	            });
+	        }
+	    }, {
+	        key: 'handleMakeData',
+	        value: function handleMakeData(event) {
+	            var _this4 = this;
+
+	            this.setState({ isLoading: true });
+	            var startJobURL = '/jobs/run/make-things';
+	            ajax.post(startJobURL).set({ 'Content-Type': 'application/json' }).send({}).end(function (error, response) {
+	                if (!error && response) {
+
+	                    console.log(_this4.state);
+	                    console.log(response.text);
+	                    var respndata = JSON.parse(response.text);
+	                    _this4.setState({ jobid: respndata.jobid, addedJob: true });
+	                }
+	                _this4.setState({ btnClicked: true, isLoading: false });
+	            });
 	        }
 	    }, {
 	        key: 'btnMarkup',
@@ -32579,7 +32631,7 @@
 	                    { className: 'form-horizontal', action: '' },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'col-sm-offset-4 col-sm-4' },
+	                        { className: 'form-group' },
 	                        _react2.default.createElement('i', { className: 'fa fa-spinner fa-spin loadingCon' })
 	                    ),
 	                    _react2.default.createElement(
@@ -32589,6 +32641,56 @@
 	                            'button',
 	                            { type: 'button', className: 'btn btn-cSend disabled' },
 	                            'Get Data'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement(
+	                            'button',
+	                            { type: 'button', className: 'btn btn-cSend disabled' },
+	                            'Make Data'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement(
+	                            'button',
+	                            { type: 'button', onClick: this.handleCheckJob, className: 'btn btn-cSend' },
+	                            'Check Job'
+	                        )
+	                    )
+	                );
+	            } else if (this.state.addedJob) {
+	                return _react2.default.createElement(
+	                    'form',
+	                    { className: 'form-horizontal' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement(
+	                            'button',
+	                            { type: 'button', onClick: this.handleFormSubmit, className: 'btn btn-cSend' },
+	                            'Get Data'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement(
+	                            'button',
+	                            { type: 'button', onClick: this.handleMakeData, className: 'btn btn-cSend' },
+	                            'Make Data'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement(
+	                            'button',
+	                            { type: 'button', onClick: this.handleCheckJob, className: 'btn btn-cSend' },
+	                            'Check Job'
 	                        )
 	                    )
 	                );
@@ -32604,9 +32706,53 @@
 	                            { type: 'button', onClick: this.handleFormSubmit, className: 'btn btn-cSend' },
 	                            'Get Data'
 	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement(
+	                            'button',
+	                            { type: 'button', onClick: this.handleMakeData, className: 'btn btn-cSend' },
+	                            'Make Data'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement(
+	                            'button',
+	                            { type: 'button', onClick: this.handleCheckJob, className: 'btn btn-cSend disabled' },
+	                            'Check Job'
+	                        )
 	                    )
 	                );
 	            }
+	        }
+	    }, {
+	        key: 'tableData',
+	        value: function tableData() {
+
+	            return this.state.things.map(function (thing, index) {
+	                return _react2.default.createElement(
+	                    'tr',
+	                    { key: index },
+	                    _react2.default.createElement(
+	                        'td',
+	                        null,
+	                        thing.id
+	                    ),
+	                    _react2.default.createElement(
+	                        'td',
+	                        null,
+	                        thing.title
+	                    ),
+	                    _react2.default.createElement(
+	                        'td',
+	                        null,
+	                        thing.description
+	                    )
+	                );
+	            });
 	        }
 	    }, {
 	        key: 'dataMarkup',
@@ -32642,6 +32788,9 @@
 	                    _react2.default.createElement(
 	                        'tbody',
 	                        null,
+<<<<<<< HEAD
+	                        this.tableData()
+=======
 	                        _react2.default.createElement(
 	                            'tr',
 	                            null,
@@ -32661,6 +32810,7 @@
 	                                'Database'
 	                            )
 	                        )
+>>>>>>> main
 	                    )
 	                );
 	            } else {
@@ -32688,7 +32838,7 @@
 	                        _react2.default.createElement(
 	                            'p',
 	                            null,
-	                            'you deployed a heroku web app!'
+	                            'Now click the button to get data from your database..'
 	                        )
 	                    )
 	                ),

@@ -4,16 +4,14 @@
 "use strict";
 
 
-require('babel-register')({
-    presets: ['react', 'es2015', 'stage-0'],
-    plugins: ['react-html-attrs', 'add-module-exports']
-});
+
+
+// require("babel-polyfill");
 
 
 let express = require('express'),
 	bodyParser = require('body-parser'),
-	apiRoutes = require('./ApiRoutes'),
-	clientRouter = require('./ClientRouter');
+	apiRoutes = require('./ApiRoutes');
 
 
 
@@ -27,6 +25,14 @@ app.use(bodyParser.json());
 
 // api
 app.use(apiRoutes);
+
+
+require('babel-register')({
+    presets: ['react', 'es2015', 'stage-0'],
+    plugins: ['react-html-attrs', 'add-module-exports']
+});
+
+let clientRouter = require('./ClientRouter');
 
 // web client --> looks at cname
 app.use(express.static(__dirname + '/../Client/build/'));
